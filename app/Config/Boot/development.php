@@ -33,4 +33,4 @@ defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', true);
  */
 defined('CI_DEBUG') || define('CI_DEBUG', true);
 
-date_default_timezone_set('Africa/Nairobi');
+date_default_timezone_set('Indian/Antananarivo');
