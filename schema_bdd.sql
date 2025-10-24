@@ -1,0 +1,1868 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 17.4
+-- Dumped by pg_dump version 17.4
+
+-- Started on 2025-10-10 15:01:00
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 228 (class 1259 OID 2123327)
+-- Name: acces; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.acces (
+    id bigint NOT NULL,
+    profil_id integer NOT NULL,
+    page_id integer[],
+    page_accueil smallint DEFAULT 0,
+    cree_par smallint,
+    date_creation timestamp without time zone,
+    modifie_par smallint,
+    date_modification timestamp without time zone,
+    supprime_par smallint,
+    date_suppression timestamp without time zone
+);
+
+
+ALTER TABLE public.acces OWNER TO postgres;
+
+--
+-- TOC entry 227 (class 1259 OID 2123326)
+-- Name: acces_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.acces_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.acces_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5144 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: acces_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.acces_id_seq OWNED BY public.acces.id;
+
+
+--
+-- TOC entry 226 (class 1259 OID 2123315)
+-- Name: acces_profil; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.acces_profil (
+    id bigint NOT NULL,
+    profil_id integer NOT NULL,
+    page_id integer NOT NULL,
+    page_accueil smallint DEFAULT 0
+);
+
+
+ALTER TABLE public.acces_profil OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 2123314)
+-- Name: acces_profil_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.acces_profil_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.acces_profil_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5145 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: acces_profil_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.acces_profil_id_seq OWNED BY public.acces_profil.id;
+
+
+--
+-- TOC entry 245 (class 1259 OID 2131655)
+-- Name: approvisionnement; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.approvisionnement (
+    id bigint NOT NULL,
+    fournisseur_id smallint,
+    categorie_id smallint,
+    article_id smallint,
+    quantite smallint,
+    date_appro date,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    actif smallint DEFAULT 1,
+    commentaire text
+);
+
+
+ALTER TABLE public.approvisionnement OWNER TO postgres;
+
+--
+-- TOC entry 244 (class 1259 OID 2131654)
+-- Name: approvisionnement_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.approvisionnement_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.approvisionnement_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5146 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: approvisionnement_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.approvisionnement_id_seq OWNED BY public.approvisionnement.id;
+
+
+--
+-- TOC entry 239 (class 1259 OID 2131588)
+-- Name: article; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.article (
+    id bigint NOT NULL,
+    reference character varying,
+    libelle character varying,
+    date_creation_article date,
+    commentaire text,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    actif smallint DEFAULT 1,
+    photo text DEFAULT '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'::text,
+    categorie_id smallint
+);
+
+
+ALTER TABLE public.article OWNER TO postgres;
+
+--
+-- TOC entry 238 (class 1259 OID 2131587)
+-- Name: article_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.article_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.article_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5147 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: article_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.article_id_seq OWNED BY public.article.id;
+
+
+--
+-- TOC entry 265 (class 1259 OID 4335521)
+-- Name: bc; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.bc (
+    id bigint NOT NULL,
+    type_client smallint,
+    client_id smallint,
+    date date,
+    total double precision DEFAULT 0,
+    remise double precision DEFAULT 0,
+    net_a_payer double precision DEFAULT 0,
+    nature_travaux text,
+    type_vehicule character varying,
+    immatriculation character varying,
+    statut_id smallint DEFAULT 1,
+    cree_par smallint,
+    date_creation timestamp without time zone,
+    modifie_par smallint,
+    date_modification timestamp without time zone,
+    supprime_par smallint,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    montant_paye double precision DEFAULT 0,
+    restant_du double precision DEFAULT 0,
+    date_validation date,
+    date_devalidation date
+);
+
+
+ALTER TABLE public.bc OWNER TO postgres;
+
+--
+-- TOC entry 5148 (class 0 OID 0)
+-- Dependencies: 265
+-- Name: TABLE bc; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TABLE public.bc IS 'statut_id :
+1 -> en attente
+2 -> refusé
+3 -> validé';
+
+
+--
+-- TOC entry 261 (class 1259 OID 4335500)
+-- Name: bc_detail_article; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.bc_detail_article (
+    id bigint NOT NULL,
+    bc_id smallint,
+    article_id smallint,
+    prix_unitaire double precision,
+    quantite double precision DEFAULT 0,
+    total double precision DEFAULT 0,
+    cree_par smallint,
+    date_creation timestamp without time zone,
+    modifie_par smallint,
+    date_modification timestamp without time zone,
+    supprime_par smallint,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0
+);
+
+
+ALTER TABLE public.bc_detail_article OWNER TO postgres;
+
+--
+-- TOC entry 260 (class 1259 OID 4335499)
+-- Name: bc_detail_article_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.bc_detail_article_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.bc_detail_article_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5149 (class 0 OID 0)
+-- Dependencies: 260
+-- Name: bc_detail_article_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.bc_detail_article_id_seq OWNED BY public.bc_detail_article.id;
+
+
+--
+-- TOC entry 263 (class 1259 OID 4335510)
+-- Name: bc_detail_autre; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.bc_detail_autre (
+    id bigint NOT NULL,
+    bc_id smallint,
+    description character varying,
+    commentaire text,
+    montant double precision DEFAULT 0,
+    cree_par smallint,
+    date_creation timestamp without time zone,
+    modifie_par smallint,
+    date_modification timestamp without time zone,
+    supprime_par smallint,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0
+);
+
+
+ALTER TABLE public.bc_detail_autre OWNER TO postgres;
+
+--
+-- TOC entry 262 (class 1259 OID 4335509)
+-- Name: bc_detail_autre_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.bc_detail_autre_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.bc_detail_autre_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5150 (class 0 OID 0)
+-- Dependencies: 262
+-- Name: bc_detail_autre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.bc_detail_autre_id_seq OWNED BY public.bc_detail_autre.id;
+
+
+--
+-- TOC entry 264 (class 1259 OID 4335520)
+-- Name: bc_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.bc_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.bc_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5151 (class 0 OID 0)
+-- Dependencies: 264
+-- Name: bc_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.bc_id_seq OWNED BY public.bc.id;
+
+
+--
+-- TOC entry 241 (class 1259 OID 2131623)
+-- Name: categorie; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.categorie (
+    id bigint NOT NULL,
+    reference character varying,
+    libelle character varying,
+    commentaire text,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    actif smallint DEFAULT 1
+);
+
+
+ALTER TABLE public.categorie OWNER TO postgres;
+
+--
+-- TOC entry 240 (class 1259 OID 2131622)
+-- Name: categorie_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.categorie_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.categorie_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5152 (class 0 OID 0)
+-- Dependencies: 240
+-- Name: categorie_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.categorie_id_seq OWNED BY public.categorie.id;
+
+
+--
+-- TOC entry 235 (class 1259 OID 2131532)
+-- Name: client_entreprise; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.client_entreprise (
+    id bigint NOT NULL,
+    libelle character varying,
+    contact character varying,
+    mail character varying,
+    adresse character varying,
+    black_list smallint DEFAULT 0,
+    commentaire text,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    actif smallint DEFAULT 1,
+    photo text DEFAULT 'iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAgAElEQVR4nOzde5xcdX3/8df3zO6GOyHZmd0EqCByERQMd4hSq4DIRdBfm6pVKxezuwnS/qi3ota1ov1VkSqQ7G4iRhGlxmrrHS+11ppwERMBBREVLZhsZnYT7kl2d87n98dMMIRkM2d3zvmeM+f9fDx8+FBmz3kzl3M+53sFEREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREZFdcr4DiEhz3cTw3k/T/jwjLDnCWUYw22GzDPZz2B4O12HYDHAzan9hWx1uq2Fjhtvi4HHDbXSEo0aw0RGU92L892+h+ym//2Yi0kwqAEQyyDA3QPnQAhxrBMeCHW3wfOAQB8V4zkkF+J2D34K7zxHeU4V7+ig95HAWxzlFJD4qAEQy4Foe3nNv9jgVOMMIzwB3ErCv71x1j4Pd5Qh+BPzoKbbcfiUHb/YdSkQmpwJAJKUGWH+Io3AhuAsgfBm4Dt+ZGmNjEPwP2NeN6lf7mPM734lE5LlUAIikyBDrOkMKlzjcm4AX+87TJPcadnNA9dM9zB3xHUZEalQAiKTAUsovc1ivw/0fYIbvPDHZatiXDTe4iNL/+A4jkncqAEQ8GWLj/sbEW8D1gB3jO0/Cfm4wNE7hpiuY/bjvMCJ5pAJAJGFLefSAAlvfb7iFwN6+83j2lMOWVZnxoUXM3OQ7jEieqAAQSUg/1jaHyiLDPgBulu88KTMKfHCY4kA/bsJ3GJE8UAEgkoABKuc77BrgSN9ZUu4Bw72jj+I3fAcRaXUqAERiNMTwi0MK1zrsTN9ZssRw3w+oXtlD972+s4i0qsB3AJFW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'::text,
+    nif character varying,
+    stat character varying
+);
+
+
+ALTER TABLE public.client_entreprise OWNER TO postgres;
+
+--
+-- TOC entry 234 (class 1259 OID 2131531)
+-- Name: client_entreprise_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.client_entreprise_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.client_entreprise_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5153 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: client_entreprise_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.client_entreprise_id_seq OWNED BY public.client_entreprise.id;
+
+
+--
+-- TOC entry 233 (class 1259 OID 2131517)
+-- Name: client_standard; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.client_standard (
+    id bigint NOT NULL,
+    nom character varying,
+    prenom character varying,
+    contact character varying,
+    mail character varying,
+    adresse character varying,
+    black_list smallint DEFAULT 0,
+    commentaire text,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    actif smallint DEFAULT 1,
+    photo text DEFAULT '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'::text
+);
+
+
+ALTER TABLE public.client_standard OWNER TO postgres;
+
+--
+-- TOC entry 232 (class 1259 OID 2131516)
+-- Name: client_standard_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.client_standard_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.client_standard_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5154 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: client_standard_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.client_standard_id_seq OWNED BY public.client_standard.id;
+
+
+--
+-- TOC entry 229 (class 1259 OID 2131408)
+-- Name: crud_action; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.crud_action (
+    id integer NOT NULL,
+    libelle character varying
+);
+
+
+ALTER TABLE public.crud_action OWNER TO postgres;
+
+--
+-- TOC entry 251 (class 1259 OID 4335090)
+-- Name: devis; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.devis (
+    id bigint NOT NULL,
+    type_client smallint,
+    client_id smallint,
+    date date,
+    validite smallint DEFAULT 0,
+    date_fin date,
+    total double precision DEFAULT 0,
+    remise double precision DEFAULT 0,
+    net_a_payer double precision DEFAULT 0,
+    cree_par smallint,
+    date_creation timestamp without time zone,
+    modifie_par smallint,
+    date_modification timestamp without time zone,
+    supprime_par smallint,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    nature_travaux text,
+    type_vehicule character varying,
+    immatriculation character varying,
+    duree_travaux double precision DEFAULT 0,
+    kilometrage_garantie character varying DEFAULT 0
+);
+
+
+ALTER TABLE public.devis OWNER TO postgres;
+
+--
+-- TOC entry 253 (class 1259 OID 4335101)
+-- Name: devis_detail_article; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.devis_detail_article (
+    id bigint NOT NULL,
+    devis_id smallint,
+    article_id smallint,
+    prix_unitaire double precision,
+    quantite double precision DEFAULT 0,
+    total double precision DEFAULT 0,
+    cree_par smallint,
+    date_creation timestamp without time zone,
+    modifie_par smallint,
+    date_modification timestamp without time zone,
+    supprime_par smallint,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0
+);
+
+
+ALTER TABLE public.devis_detail_article OWNER TO postgres;
+
+--
+-- TOC entry 252 (class 1259 OID 4335100)
+-- Name: devis_detail_article_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.devis_detail_article_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.devis_detail_article_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5155 (class 0 OID 0)
+-- Dependencies: 252
+-- Name: devis_detail_article_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.devis_detail_article_id_seq OWNED BY public.devis_detail_article.id;
+
+
+--
+-- TOC entry 255 (class 1259 OID 4335111)
+-- Name: devis_detail_autre; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.devis_detail_autre (
+    id bigint NOT NULL,
+    devis_id smallint,
+    description character varying,
+    commentaire text,
+    montant double precision DEFAULT 0,
+    cree_par smallint,
+    date_creation timestamp without time zone,
+    modifie_par smallint,
+    date_modification timestamp without time zone,
+    supprime_par smallint,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0
+);
+
+
+ALTER TABLE public.devis_detail_autre OWNER TO postgres;
+
+--
+-- TOC entry 254 (class 1259 OID 4335110)
+-- Name: devis_detail_autre_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.devis_detail_autre_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.devis_detail_autre_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5156 (class 0 OID 0)
+-- Dependencies: 254
+-- Name: devis_detail_autre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.devis_detail_autre_id_seq OWNED BY public.devis_detail_autre.id;
+
+
+--
+-- TOC entry 250 (class 1259 OID 4335089)
+-- Name: devis_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.devis_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.devis_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5157 (class 0 OID 0)
+-- Dependencies: 250
+-- Name: devis_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.devis_id_seq OWNED BY public.devis.id;
+
+
+--
+-- TOC entry 237 (class 1259 OID 2131553)
+-- Name: fournisseur; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.fournisseur (
+    id bigint NOT NULL,
+    libelle character varying,
+    contact character varying,
+    mail character varying,
+    adresse character varying,
+    black_list smallint DEFAULT 0,
+    commentaire text,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    actif smallint DEFAULT 1,
+    photo text DEFAULT 'iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAABnLElEQVR4Xuy9B3gc1b3+/6cFCOTmkoT03PzuTU9u6r1B1koGCxewLXdsY2yKe8MGDC6SbEogdDcV94Zt3Cu9GOMCJKEZ25QEEiA3lZBCs8GAff7vO7vfZXS0klbSrrS7ej/P8z4zOzvlzMyZ8875zpkz/9//J4QQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghh'::text
+);
+
+
+ALTER TABLE public.fournisseur OWNER TO postgres;
+
+--
+-- TOC entry 236 (class 1259 OID 2131552)
+-- Name: fournisseur_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.fournisseur_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.fournisseur_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5158 (class 0 OID 0)
+-- Dependencies: 236
+-- Name: fournisseur_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.fournisseur_id_seq OWNED BY public.fournisseur.id;
+
+
+--
+-- TOC entry 224 (class 1259 OID 2123304)
+-- Name: historique; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.historique (
+    id bigint NOT NULL,
+    data_json text,
+    utilisateur_id integer,
+    date_creation timestamp without time zone DEFAULT now(),
+    action_id integer
+);
+
+
+ALTER TABLE public.historique OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 2123303)
+-- Name: historique_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.historique_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.historique_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5159 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: historique_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.historique_id_seq OWNED BY public.historique.id;
+
+
+--
+-- TOC entry 271 (class 1259 OID 4335833)
+-- Name: numero_facture; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.numero_facture (
+    id bigint NOT NULL,
+    bc_id bigint,
+    cree_par smallint,
+    date_creation timestamp without time zone
+);
+
+
+ALTER TABLE public.numero_facture OWNER TO postgres;
+
+--
+-- TOC entry 270 (class 1259 OID 4335832)
+-- Name: numero_facture_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.numero_facture_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.numero_facture_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5160 (class 0 OID 0)
+-- Dependencies: 270
+-- Name: numero_facture_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.numero_facture_id_seq OWNED BY public.numero_facture.id;
+
+
+--
+-- TOC entry 220 (class 1259 OID 2123271)
+-- Name: page; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.page (
+    id bigint NOT NULL,
+    libelle character varying,
+    actif smallint DEFAULT 1,
+    icone character varying,
+    lien character varying,
+    section_id integer,
+    sous_section_id smallint,
+    ordre smallint,
+    show_menu smallint DEFAULT 1,
+    is_list_vertical smallint DEFAULT 0
+);
+
+
+ALTER TABLE public.page OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 2123270)
+-- Name: page_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.page_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.page_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5161 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: page_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.page_id_seq OWNED BY public.page.id;
+
+
+--
+-- TOC entry 273 (class 1259 OID 4343899)
+-- Name: paiement_credit; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.paiement_credit (
+    id bigint NOT NULL,
+    bc_id bigint,
+    montant double precision,
+    cree_par smallint,
+    date_creation timestamp with time zone,
+    modifie_par smallint,
+    date_modification timestamp without time zone,
+    supprime_par smallint,
+    date_suppression timestamp without time zone,
+    date_paiement date,
+    flag_suppression smallint DEFAULT 0,
+    commentaire text,
+    num_facture_id bigint
+);
+
+
+ALTER TABLE public.paiement_credit OWNER TO postgres;
+
+--
+-- TOC entry 272 (class 1259 OID 4343898)
+-- Name: paiement_credit_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.paiement_credit_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.paiement_credit_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5162 (class 0 OID 0)
+-- Dependencies: 272
+-- Name: paiement_credit_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.paiement_credit_id_seq OWNED BY public.paiement_credit.id;
+
+
+--
+-- TOC entry 218 (class 1259 OID 2123207)
+-- Name: profil; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.profil (
+    id bigint NOT NULL,
+    libelle character varying,
+    actif smallint DEFAULT 1,
+    date_creation timestamp without time zone,
+    cree_par integer,
+    date_modification timestamp without time zone,
+    modifie_par integer,
+    date_suppression timestamp without time zone,
+    supprime_par integer,
+    flag_suppression smallint DEFAULT 0
+);
+
+
+ALTER TABLE public.profil OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 2123206)
+-- Name: profil_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.profil_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.profil_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5163 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: profil_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.profil_id_seq OWNED BY public.profil.id;
+
+
+--
+-- TOC entry 247 (class 1259 OID 2131783)
+-- Name: promotion; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.promotion (
+    id bigint NOT NULL,
+    libelle character varying,
+    pourcentage double precision,
+    list_article_id integer[],
+    date_debut date,
+    date_fin date,
+    commentaire text,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    actif smallint DEFAULT 1
+);
+
+
+ALTER TABLE public.promotion OWNER TO postgres;
+
+--
+-- TOC entry 246 (class 1259 OID 2131782)
+-- Name: promotion_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.promotion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.promotion_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5164 (class 0 OID 0)
+-- Dependencies: 246
+-- Name: promotion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.promotion_id_seq OWNED BY public.promotion.id;
+
+
+--
+-- TOC entry 222 (class 1259 OID 2123291)
+-- Name: section; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.section (
+    id bigint NOT NULL,
+    libelle character varying,
+    actif smallint DEFAULT 1,
+    icone character varying,
+    ordre smallint DEFAULT 0,
+    avoir_sous_section smallint DEFAULT 0,
+    image text
+);
+
+
+ALTER TABLE public.section OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 2123290)
+-- Name: section_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.section_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.section_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5165 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: section_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.section_id_seq OWNED BY public.section.id;
+
+
+--
+-- TOC entry 243 (class 1259 OID 2131637)
+-- Name: seuil_stock; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.seuil_stock (
+    id bigint NOT NULL,
+    article_id smallint,
+    seuil_min smallint,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    actif smallint DEFAULT 1
+);
+
+
+ALTER TABLE public.seuil_stock OWNER TO postgres;
+
+--
+-- TOC entry 242 (class 1259 OID 2131636)
+-- Name: seuil_stock_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.seuil_stock_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.seuil_stock_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5166 (class 0 OID 0)
+-- Dependencies: 242
+-- Name: seuil_stock_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.seuil_stock_id_seq OWNED BY public.seuil_stock.id;
+
+
+--
+-- TOC entry 259 (class 1259 OID 4335452)
+-- Name: societe; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.societe (
+    id bigint NOT NULL,
+    libelle character varying,
+    adresse character varying,
+    ville character varying,
+    nif character varying,
+    stat character varying,
+    rcs character varying,
+    compte_bancaire character varying,
+    telephone character varying,
+    adresse_mail character varying,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    logo text DEFAULT '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'::text,
+    banque character varying
+);
+
+
+ALTER TABLE public.societe OWNER TO postgres;
+
+--
+-- TOC entry 258 (class 1259 OID 4335451)
+-- Name: societe_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.societe_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.societe_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5167 (class 0 OID 0)
+-- Dependencies: 258
+-- Name: societe_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.societe_id_seq OWNED BY public.societe.id;
+
+
+--
+-- TOC entry 269 (class 1259 OID 4335822)
+-- Name: statut; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.statut (
+    id bigint NOT NULL,
+    libelle character varying,
+    actif smallint DEFAULT 1
+);
+
+
+ALTER TABLE public.statut OWNER TO postgres;
+
+--
+-- TOC entry 268 (class 1259 OID 4335821)
+-- Name: statut_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.statut_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.statut_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5168 (class 0 OID 0)
+-- Dependencies: 268
+-- Name: statut_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.statut_id_seq OWNED BY public.statut.id;
+
+
+--
+-- TOC entry 267 (class 1259 OID 4335702)
+-- Name: stock; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.stock (
+    id bigint NOT NULL,
+    article_id smallint,
+    quantite smallint DEFAULT 0,
+    actif smallint DEFAULT 1,
+    date_creation timestamp without time zone,
+    cree_par integer,
+    date_modification timestamp without time zone,
+    modifie_par integer,
+    date_suppression timestamp without time zone,
+    supprime_par integer,
+    flag_suppression smallint DEFAULT 0
+);
+
+
+ALTER TABLE public.stock OWNER TO postgres;
+
+--
+-- TOC entry 266 (class 1259 OID 4335701)
+-- Name: stock_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.stock_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.stock_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5169 (class 0 OID 0)
+-- Dependencies: 266
+-- Name: stock_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.stock_id_seq OWNED BY public.stock.id;
+
+
+--
+-- TOC entry 249 (class 1259 OID 4330371)
+-- Name: tarification; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.tarification (
+    id bigint NOT NULL,
+    article_id smallint,
+    prix_client_standard double precision,
+    prix_client_entreprise double precision,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    actif smallint DEFAULT 1
+);
+
+
+ALTER TABLE public.tarification OWNER TO postgres;
+
+--
+-- TOC entry 248 (class 1259 OID 4330370)
+-- Name: tarification_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.tarification_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.tarification_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5170 (class 0 OID 0)
+-- Dependencies: 248
+-- Name: tarification_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.tarification_id_seq OWNED BY public.tarification.id;
+
+
+--
+-- TOC entry 231 (class 1259 OID 2131429)
+-- Name: utilisateur; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.utilisateur (
+    id bigint NOT NULL,
+    login character varying,
+    nom character varying,
+    prenom character varying,
+    profil_id smallint,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    flag_suppression smallint DEFAULT 0,
+    actif smallint DEFAULT 1,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    is_theme_dark smallint DEFAULT 0,
+    mdp text DEFAULT '$2y$10$5lfUQ64ebsP9IpwRCYbWWO91UYyRGG57zbsikKCq90oSMCQaxVQO2'::text,
+    derniere_connection timestamp without time zone,
+    is_menu_vertical smallint DEFAULT 0
+);
+
+
+ALTER TABLE public.utilisateur OWNER TO postgres;
+
+--
+-- TOC entry 230 (class 1259 OID 2131428)
+-- Name: utilisateur_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.utilisateur_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.utilisateur_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5171 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: utilisateur_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.utilisateur_id_seq OWNED BY public.utilisateur.id;
+
+
+--
+-- TOC entry 257 (class 1259 OID 4335215)
+-- Name: vehicule; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.vehicule (
+    id bigint NOT NULL,
+    libelle character varying,
+    cree_par smallint,
+    modifie_par smallint,
+    supprime_par smallint,
+    date_creation timestamp without time zone,
+    date_modification timestamp without time zone,
+    date_suppression timestamp without time zone,
+    flag_suppression smallint DEFAULT 0,
+    photo text DEFAULT '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'::text
+);
+
+
+ALTER TABLE public.vehicule OWNER TO postgres;
+
+--
+-- TOC entry 256 (class 1259 OID 4335214)
+-- Name: vehicule_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.vehicule_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.vehicule_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 5172 (class 0 OID 0)
+-- Dependencies: 256
+-- Name: vehicule_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.vehicule_id_seq OWNED BY public.vehicule.id;
+
+
+--
+-- TOC entry 4849 (class 2604 OID 2123330)
+-- Name: acces id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.acces ALTER COLUMN id SET DEFAULT nextval('public.acces_id_seq'::regclass);
+
+
+--
+-- TOC entry 4847 (class 2604 OID 2123318)
+-- Name: acces_profil id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.acces_profil ALTER COLUMN id SET DEFAULT nextval('public.acces_profil_id_seq'::regclass);
+
+
+--
+-- TOC entry 4882 (class 2604 OID 2131658)
+-- Name: approvisionnement id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.approvisionnement ALTER COLUMN id SET DEFAULT nextval('public.approvisionnement_id_seq'::regclass);
+
+
+--
+-- TOC entry 4872 (class 2604 OID 2131591)
+-- Name: article id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.article ALTER COLUMN id SET DEFAULT nextval('public.article_id_seq'::regclass);
+
+
+--
+-- TOC entry 4919 (class 2604 OID 4335524)
+-- Name: bc id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bc ALTER COLUMN id SET DEFAULT nextval('public.bc_id_seq'::regclass);
+
+
+--
+-- TOC entry 4912 (class 2604 OID 4335503)
+-- Name: bc_detail_article id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bc_detail_article ALTER COLUMN id SET DEFAULT nextval('public.bc_detail_article_id_seq'::regclass);
+
+
+--
+-- TOC entry 4916 (class 2604 OID 4335513)
+-- Name: bc_detail_autre id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bc_detail_autre ALTER COLUMN id SET DEFAULT nextval('public.bc_detail_autre_id_seq'::regclass);
+
+
+--
+-- TOC entry 4876 (class 2604 OID 2131626)
+-- Name: categorie id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categorie ALTER COLUMN id SET DEFAULT nextval('public.categorie_id_seq'::regclass);
+
+
+--
+-- TOC entry 4862 (class 2604 OID 2131535)
+-- Name: client_entreprise id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.client_entreprise ALTER COLUMN id SET DEFAULT nextval('public.client_entreprise_id_seq'::regclass);
+
+
+--
+-- TOC entry 4857 (class 2604 OID 2131520)
+-- Name: client_standard id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.client_standard ALTER COLUMN id SET DEFAULT nextval('public.client_standard_id_seq'::regclass);
+
+
+--
+-- TOC entry 4891 (class 2604 OID 4335093)
+-- Name: devis id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.devis ALTER COLUMN id SET DEFAULT nextval('public.devis_id_seq'::regclass);
+
+
+--
+-- TOC entry 4899 (class 2604 OID 4335104)
+-- Name: devis_detail_article id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.devis_detail_article ALTER COLUMN id SET DEFAULT nextval('public.devis_detail_article_id_seq'::regclass);
+
+
+--
+-- TOC entry 4903 (class 2604 OID 4335114)
+-- Name: devis_detail_autre id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.devis_detail_autre ALTER COLUMN id SET DEFAULT nextval('public.devis_detail_autre_id_seq'::regclass);
+
+
+--
+-- TOC entry 4867 (class 2604 OID 2131556)
+-- Name: fournisseur id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.fournisseur ALTER COLUMN id SET DEFAULT nextval('public.fournisseur_id_seq'::regclass);
+
+
+--
+-- TOC entry 4845 (class 2604 OID 2123307)
+-- Name: historique id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.historique ALTER COLUMN id SET DEFAULT nextval('public.historique_id_seq'::regclass);
+
+
+--
+-- TOC entry 4933 (class 2604 OID 4335836)
+-- Name: numero_facture id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.numero_facture ALTER COLUMN id SET DEFAULT nextval('public.numero_facture_id_seq'::regclass);
+
+
+--
+-- TOC entry 4837 (class 2604 OID 2123274)
+-- Name: page id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.page ALTER COLUMN id SET DEFAULT nextval('public.page_id_seq'::regclass);
+
+
+--
+-- TOC entry 4934 (class 2604 OID 4343902)
+-- Name: paiement_credit id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.paiement_credit ALTER COLUMN id SET DEFAULT nextval('public.paiement_credit_id_seq'::regclass);
+
+
+--
+-- TOC entry 4834 (class 2604 OID 2123210)
+-- Name: profil id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profil ALTER COLUMN id SET DEFAULT nextval('public.profil_id_seq'::regclass);
+
+
+--
+-- TOC entry 4885 (class 2604 OID 2131786)
+-- Name: promotion id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.promotion ALTER COLUMN id SET DEFAULT nextval('public.promotion_id_seq'::regclass);
+
+
+--
+-- TOC entry 4841 (class 2604 OID 2123294)
+-- Name: section id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.section ALTER COLUMN id SET DEFAULT nextval('public.section_id_seq'::regclass);
+
+
+--
+-- TOC entry 4879 (class 2604 OID 2131640)
+-- Name: seuil_stock id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.seuil_stock ALTER COLUMN id SET DEFAULT nextval('public.seuil_stock_id_seq'::regclass);
+
+
+--
+-- TOC entry 4909 (class 2604 OID 4335455)
+-- Name: societe id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.societe ALTER COLUMN id SET DEFAULT nextval('public.societe_id_seq'::regclass);
+
+
+--
+-- TOC entry 4931 (class 2604 OID 4335825)
+-- Name: statut id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.statut ALTER COLUMN id SET DEFAULT nextval('public.statut_id_seq'::regclass);
+
+
+--
+-- TOC entry 4927 (class 2604 OID 4335705)
+-- Name: stock id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.stock ALTER COLUMN id SET DEFAULT nextval('public.stock_id_seq'::regclass);
+
+
+--
+-- TOC entry 4888 (class 2604 OID 4330374)
+-- Name: tarification id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tarification ALTER COLUMN id SET DEFAULT nextval('public.tarification_id_seq'::regclass);
+
+
+--
+-- TOC entry 4851 (class 2604 OID 2131432)
+-- Name: utilisateur id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.utilisateur ALTER COLUMN id SET DEFAULT nextval('public.utilisateur_id_seq'::regclass);
+
+
+--
+-- TOC entry 4906 (class 2604 OID 4335218)
+-- Name: vehicule id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.vehicule ALTER COLUMN id SET DEFAULT nextval('public.vehicule_id_seq'::regclass);
+
+
+--
+-- TOC entry 4947 (class 2606 OID 2123335)
+-- Name: acces acces_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.acces
+    ADD CONSTRAINT acces_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4945 (class 2606 OID 2123321)
+-- Name: acces_profil acces_profil_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.acces_profil
+    ADD CONSTRAINT acces_profil_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4949 (class 2606 OID 2131414)
+-- Name: crud_action action_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.crud_action
+    ADD CONSTRAINT action_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4965 (class 2606 OID 2131662)
+-- Name: approvisionnement approvisionnement_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.approvisionnement
+    ADD CONSTRAINT approvisionnement_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4959 (class 2606 OID 2131599)
+-- Name: article article_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.article
+    ADD CONSTRAINT article_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4981 (class 2606 OID 4335508)
+-- Name: bc_detail_article bc_detail_article_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bc_detail_article
+    ADD CONSTRAINT bc_detail_article_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4983 (class 2606 OID 4335519)
+-- Name: bc_detail_autre bc_detail_autre_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bc_detail_autre
+    ADD CONSTRAINT bc_detail_autre_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4985 (class 2606 OID 4335536)
+-- Name: bc bc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bc
+    ADD CONSTRAINT bc_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4961 (class 2606 OID 2131632)
+-- Name: categorie categorie_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categorie
+    ADD CONSTRAINT categorie_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4955 (class 2606 OID 2131544)
+-- Name: client_entreprise client_entreprise_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.client_entreprise
+    ADD CONSTRAINT client_entreprise_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4953 (class 2606 OID 2131529)
+-- Name: client_standard client_standard_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.client_standard
+    ADD CONSTRAINT client_standard_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4973 (class 2606 OID 4335109)
+-- Name: devis_detail_article devis_detail_article_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.devis_detail_article
+    ADD CONSTRAINT devis_detail_article_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4975 (class 2606 OID 4335120)
+-- Name: devis_detail_autre devis_detail_autre_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.devis_detail_autre
+    ADD CONSTRAINT devis_detail_autre_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4971 (class 2606 OID 4335099)
+-- Name: devis devis_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.devis
+    ADD CONSTRAINT devis_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4957 (class 2606 OID 2131565)
+-- Name: fournisseur fournisseur_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.fournisseur
+    ADD CONSTRAINT fournisseur_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4943 (class 2606 OID 2123312)
+-- Name: historique historique_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.historique
+    ADD CONSTRAINT historique_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4991 (class 2606 OID 4335838)
+-- Name: numero_facture numero_facture_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.numero_facture
+    ADD CONSTRAINT numero_facture_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4939 (class 2606 OID 2123281)
+-- Name: page page_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.page
+    ADD CONSTRAINT page_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4993 (class 2606 OID 4343904)
+-- Name: paiement_credit paiement_credit_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.paiement_credit
+    ADD CONSTRAINT paiement_credit_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4937 (class 2606 OID 2123215)
+-- Name: profil profil_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profil
+    ADD CONSTRAINT profil_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4967 (class 2606 OID 2131792)
+-- Name: promotion promotion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.promotion
+    ADD CONSTRAINT promotion_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4941 (class 2606 OID 2123301)
+-- Name: section section_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.section
+    ADD CONSTRAINT section_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4963 (class 2606 OID 2131644)
+-- Name: seuil_stock seuil_stock_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.seuil_stock
+    ADD CONSTRAINT seuil_stock_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4979 (class 2606 OID 4335462)
+-- Name: societe societe_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.societe
+    ADD CONSTRAINT societe_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4989 (class 2606 OID 4335830)
+-- Name: statut statut_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.statut
+    ADD CONSTRAINT statut_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4987 (class 2606 OID 4335710)
+-- Name: stock stock_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.stock
+    ADD CONSTRAINT stock_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4969 (class 2606 OID 4330378)
+-- Name: tarification tarification_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tarification
+    ADD CONSTRAINT tarification_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4951 (class 2606 OID 2131440)
+-- Name: utilisateur utilisateur_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.utilisateur
+    ADD CONSTRAINT utilisateur_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4977 (class 2606 OID 4335225)
+-- Name: vehicule vehicule_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.vehicule
+    ADD CONSTRAINT vehicule_pkey PRIMARY KEY (id);
+
+
+-- Completed on 2025-10-10 15:01:01
+
+--
+-- PostgreSQL database dump complete
+--
+

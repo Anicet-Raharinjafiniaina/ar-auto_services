@@ -1,0 +1,59 @@
+        .modal-title {
+            width: 100%;
+            text-align: center;
+        }
+
+        .switch-label {
+            position: relative;
+        }
+
+        .switch-label .form-check-input {
+            width: 75px;
+            height: 20px;
+        }
+
+        .switch-label .form-check-input:checked::after {
+            content: "ACTIF";
+            color: white;
+            position: absolute;
+            left: 15px;
+            top: 5px;
+            font-size: 12px;
+        }
+
+        .switch-label .form-check-input::after {
+            content: "INACTIF";
+            color: grey;
+            position: absolute;
+            left: 20px;
+            top: 5px;
+            font-size: 12px;
+        }
+
+        .double-ring-spinner {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+        }
+
+        .double-ring-spinner:after {
+            content: " ";
+            display: block;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            border-radius: 50%;
+            border: 6px solid #3498db;
+            border-color: #3498db transparent #3498db transparent;
+            animation: double-ring 1.2s linear infinite;
+        }
+
+        @keyframes double-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
