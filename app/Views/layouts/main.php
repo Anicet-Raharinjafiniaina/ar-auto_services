@@ -167,11 +167,17 @@ $arr_menu = getMenu();
                         <button type="button" class="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i>
-                            <span class="d-none d-xl-inline-block ms-1 fw-medium"><?= session()->get('nom') ?? "" ?></span>
+                            <span class="d-none d-xl-inline-block ms-1 fw-medium"><?= session()->get('login') . " - " . session()->get('nom') ?? "" ?></span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <!-- item-->
+                            <div class="d-flex align-items-center px-3 py-2 d-xl-none">
+                                <i class="mdi mdi-account font-size-16 me-2"></i>
+                                <span class="fw-medium"><i><u>
+                                            <?= session()->get('login') . " - " . session()->get('nom') ?? "" ?>
+                                    </i></u> </span>
+                            </div>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" onclick="modalMpd()"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> Changer le mot de passe</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="<?= base_url("/Login/logout") ?>"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Se déconnecter</a>

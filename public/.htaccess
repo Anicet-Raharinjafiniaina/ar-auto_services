@@ -38,3 +38,5 @@ Options -Indexes +SymLinksIfOwnerMatch
 
 # Disable server signature
 ServerSignature Off
+
+php_value date.timezone "Africa/Nairobi"
