@@ -121,9 +121,11 @@ class User extends BaseController
                 $id = $arr_data['id'];
                 unset($arr_data['id']);
                 $result = $crud->maj(["id" => $id], $arr_data, 2);
-                $session = session();
-                $session->set('nom', $arr_data['nom'] . " " . $arr_data['prenom']);
-                $session->set('profil_id', $arr_data['profil_id']);
+                if ($arr_data['id'] == session()->get('user_id')) {
+                    $session = session();
+                    $session->set('nom', $arr_data['nom'] . " " . $arr_data['prenom']);
+                    $session->set('profil_id', $arr_data['profil_id']);
+                }
                 return json_encode($result);
             }
         }
