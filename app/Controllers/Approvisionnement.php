@@ -168,6 +168,10 @@ class Approvisionnement extends BaseController
             } else {
                 $crud = new CrudModel(TBL_APPROVISIONNEMENT);
                 $result = $crud->maj(["id" => $id], $arr_data, 21);
+                echo '<pre>arr_data';
+                print_r($arr_data);
+                echo '</pre>';
+                die;
                 if ($result == 1) {
                     $tool->majStock($arr_data['article_id'], $arr_data['quantite'], $arr_base['quantite']);
                 }
