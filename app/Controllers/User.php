@@ -112,7 +112,6 @@ class User extends BaseController
         $crud = new CrudModel(TBL_UTILISATEUR);
         if (!empty($arr_data)) {
             $is_login_exist = $crud->getNb(array("login" => $arr_data['login'], "id != " . $arr_data['id'] => null, "flag_suppression" => 0));
-            $arr_data['actif'] = (($arr_data['actif']  == 'true') ? 1 : 0);
             $is_data_exist = $crud->getNb($arr_data);
             if ($is_login_exist > 0) {
                 return json_encode(2); // login doublon
@@ -122,9 +121,11 @@ class User extends BaseController
                 $id = $arr_data['id'];
                 unset($arr_data['id']);
                 $result = $crud->maj(["id" => $id], $arr_data, 2);
-                $session = session();
-                $session->set('nom', $arr_data['nom'] . " " . $arr_data['prenom']);
-                $session->set('profil_id', $arr_data['profil_id']);
+                if ($id == session()->get('user_id')) {
+                    $session = session();
+                    $session->set('nom', $arr_data['nom'] . " " . $arr_data['prenom']);
+                    $session->set('profil_id', $arr_data['profil_id']);
+                }
                 return json_encode($result);
             }
         }

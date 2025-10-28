@@ -299,6 +299,6 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
     <?php endforeach;
                             endif; ?>`;
 </script>
-<script src="assets/js/bases_pages/typeahead.min.js?d=<?= date('YmdHis') ?>"></script>
-<script type="text/javascript" src="assets/js/pages/devis.js?d=<?= date('YmdHis') ?>"></script>
+<script src="assets/js/bases_pages/typeahead.min.js"></script>
+<script type="text/javascript" src="assets/js/pages/devis.js"></script>
 <?= $this->endSection() ?>

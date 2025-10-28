@@ -1,5 +1,8 @@
 <?php
 
+$appConfig = config('App');
+date_default_timezone_set($appConfig->appTimezone);
+
 /*
  |--------------------------------------------------------------------------
  | ERROR DISPLAY

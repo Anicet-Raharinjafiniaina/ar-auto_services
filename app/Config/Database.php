@@ -28,10 +28,10 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'localhost',  // Assurez-vous que l'hôte est correct
-        'username' => 'postgres',
-        'password' => 'root',
-        'database' => 'AR',
+        'hostname' => 'ar-auto-services.mg',  // Assurez-vous que l'hôte est correct
+        'username' => 'kme',
+        'password' => 'Kme123456!',
+        'database' => 'bdd_AR_test',
         'DBDriver' => 'Postgre',    // Assurez-vous que le driver est bien Postgre
         'DBPrefix' => '',
         'pConnect' => false,

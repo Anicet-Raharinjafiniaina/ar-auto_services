@@ -40,6 +40,7 @@ class CrudModel extends Model
                 $arrHisto = [
                     'data_json' => json_encode($arr),
                     'utilisateur_id' =>  session()->get('user_id'),
+                    'date_creation' => date('Y-m-d H:i:s'),
                     'action_id' => $actionId,
                 ];
                 $db = \Config\Database::connect();
@@ -103,6 +104,7 @@ class CrudModel extends Model
                 $arrHisto = [
                     'data_json' => json_encode($arr_old),
                     'utilisateur_id' =>  session()->get('user_id'),
+                    'date_creation' => date('Y-m-d H:i:s'),
                     'action_id' => $actionId,
                 ];
                 $db = \Config\Database::connect();
@@ -132,6 +134,7 @@ class CrudModel extends Model
                 $arrHisto = [
                     'data_json' => json_encode($arr_old),
                     'utilisateur_id' => session()->get('user_id'),
+                    'date_creation' => date('Y-m-d H:i:s'),
                     'action_id' => $actionId,
                 ];
                 $db = \Config\Database::connect();
@@ -502,6 +505,7 @@ class CrudModel extends Model
             $arrHisto = [
                 'data_json' => json_encode(["logIn/logOut"]),
                 'utilisateur_id' => session()->get('user_id'),
+                'date_creation' => date('Y-m-d H:i:s'),
                 'action_id' => $actionId,
             ];
 

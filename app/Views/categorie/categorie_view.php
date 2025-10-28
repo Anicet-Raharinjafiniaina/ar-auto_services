@@ -115,5 +115,5 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
 
 <?= $this->section('script') ?>
 <!-- datepicker js -->
-<script type="text/javascript" src="assets/js/pages/categorie.js?d=<?= date('YmdHis')  ?>"></script>
+<script type="text/javascript" src="assets/js/pages/categorie.js"></script>
 <?= $this->endSection() ?>

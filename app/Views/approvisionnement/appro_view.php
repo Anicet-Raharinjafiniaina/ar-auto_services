@@ -109,7 +109,7 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
 
                     <div class="form-group">
                         <label>Quantité <span class="text-bold text-danger-600">*</span></label>
-                        <input type="text" class="form-control input-xs obligatoire" placeholder="Quantitét..." name="quantite" id="quantite" onkeyup="numberDecimal(this)">
+                        <input type="text" class="form-control input-xs obligatoire" placeholder="Quantité..." name="quantite" id="quantite" onkeyup="numberDecimal(this)">
                         <label id="quantite-error" class="validation-error-label" for="quantite"></label>
                     </div>
 
@@ -154,5 +154,5 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
 
 <?= $this->section('script') ?>
 <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
-<script type="text/javascript" src="assets/js/pages/aprovisionnement.js?d=<?= date('YmdHis')  ?>"></script>
+<script type="text/javascript" src="assets/js/pages/aprovisionnement.js"></script>
 <?= $this->endSection() ?>

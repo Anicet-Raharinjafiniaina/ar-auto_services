@@ -125,7 +125,7 @@
     <script src='<?= base_url("assets/libs/jquery/jquery.min.js") ?>'></script>
     <script src='<?= base_url("assets/libs/jquery/blockui.min.js") ?>'></script>
     <script src='<?= base_url("assets/libs/bootstrap/js/bootstrap.bundle.min.js") ?>'> </script>
-    <script src="assets/js/pages/login.js?d=<?= date('YmdHis') ?>"> </script>
+    <script src="assets/js/pages/login.js"> </script>
 
 </body>
 

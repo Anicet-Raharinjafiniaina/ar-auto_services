@@ -6,7 +6,6 @@ use App\Models\CrudModel;
 use App\Controllers\Acces;
 use App\Controllers\Tools;
 use App\Libraries\LibExcel;
-use App\Controllers\BonDeCommande;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -156,7 +155,7 @@ class Approvisionnement extends BaseController
         }
         $tool = new Tools();
         $arr_data = $this->request->getVar('data');
-        $arr_appro['date_appro'] = $tool->normalizeDate($arr_data['date_appro']);
+        $arr_data['date_appro'] = $tool->normalizeDate($arr_data['date_appro']);
         $id = $arr_data['id'];
         unset($arr_data['id']);
         $crud_base = new CrudModel(TBL_APPROVISIONNEMENT);
