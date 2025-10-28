@@ -127,5 +127,5 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
-<script type="text/javascript" src="assets/js/pages/user.js?d=<?= date('YmdHis')  ?>"></script>
+<script type="text/javascript" src="assets/js/pages/user.js"></script>
 <?= $this->endSection() ?>

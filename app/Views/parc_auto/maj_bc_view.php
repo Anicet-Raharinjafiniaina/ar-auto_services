@@ -188,4 +188,4 @@
         </div>
     <?php endif; ?>
 </form>
-<script type="text/javascript" src="assets/js/pages/bc_upd.js?d=<?= date('YmdHis') ?>"></script>
+<script type="text/javascript" src="assets/js/pages/bc_upd.js"></script>

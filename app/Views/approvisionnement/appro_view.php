@@ -154,5 +154,5 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
 
 <?= $this->section('script') ?>
 <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
-<script type="text/javascript" src="assets/js/pages/aprovisionnement.js?d=<?= date('YmdHis')  ?>"></script>
+<script type="text/javascript" src="assets/js/pages/aprovisionnement.js"></script>
 <?= $this->endSection() ?>

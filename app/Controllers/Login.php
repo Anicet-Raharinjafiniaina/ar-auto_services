@@ -24,7 +24,7 @@ class Login extends BaseController
                 $session->set('profil_id', $arr_user->profil_id);
                 $session->set('theme', $arr_user->is_theme_dark);
                 $crud = new CrudModel(TBL_UTILISATEUR);
-                $crud->majData(["id" => $arr_user->id], ["derniere_connection" => 'now']);
+                $crud->majData(["id" => $arr_user->id], ["derniere_connection" => date("Y-m-d H:i:s")]);
                 $crud_histo = new CrudModel();
                 $crud_histo->logInAndOut(29);
                 return json_encode(1);

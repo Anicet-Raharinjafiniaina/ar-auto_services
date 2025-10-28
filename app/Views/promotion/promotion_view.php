@@ -165,5 +165,5 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
 <?= $this->section('script') ?>
 <script type="text/javascript" src='<?= base_url("assets/libs/duallistbox/duallistbox.min.js") ?>'></script>
 <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
-<script type="text/javascript" src="assets/js/pages/promotion.js?d=<?= date('YmdHis')  ?>"></script>
+<script type="text/javascript" src="assets/js/pages/promotion.js"></script>
 <?= $this->endSection() ?>

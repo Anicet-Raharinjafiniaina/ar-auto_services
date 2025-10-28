@@ -163,4 +163,4 @@
         </div>
     <?php endif; ?>
 </form>
-<script type="text/javascript" src="assets/js/pages/facturation.js?d=<?= date('YmdHis') ?>"></script>
+<script type="text/javascript" src="assets/js/pages/facturation.js"></script>
