@@ -6,7 +6,6 @@ use App\Models\CrudModel;
 use App\Controllers\Acces;
 use App\Controllers\Tools;
 use App\Libraries\LibExcel;
-use App\Controllers\BonDeCommande;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -156,7 +155,7 @@ class Approvisionnement extends BaseController
         }
         $tool = new Tools();
         $arr_data = $this->request->getVar('data');
-        $arr_appro['date_appro'] = $tool->normalizeDate($arr_data['date_appro']);
+        $arr_data['date_appro'] = $tool->normalizeDate($arr_data['date_appro']);
         $id = $arr_data['id'];
         unset($arr_data['id']);
         $crud_base = new CrudModel(TBL_APPROVISIONNEMENT);
@@ -168,10 +167,6 @@ class Approvisionnement extends BaseController
             } else {
                 $crud = new CrudModel(TBL_APPROVISIONNEMENT);
                 $result = $crud->maj(["id" => $id], $arr_data, 21);
-                echo '<pre>arr_data';
-                print_r($arr_data);
-                echo '</pre>';
-                die;
                 if ($result == 1) {
                     $tool->majStock($arr_data['article_id'], $arr_data['quantite'], $arr_base['quantite']);
                 }
