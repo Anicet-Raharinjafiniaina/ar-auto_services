@@ -51,7 +51,7 @@
 
     <div class="form-group">
         <label>Quantité <span class="text-bold text-danger-600">*</span></label>
-        <input type="text" class="form-control input-xs obligatoire" placeholder="Quantitét..." name="quantite_upd" id="quantite_upd" value="<?= $data->quantite; ?>" onkeyup="numberDecimal(this)" <?= $disabled; ?>>
+        <input type="text" class="form-control input-xs obligatoire" placeholder="Quantité..." name="quantite_upd" id="quantite_upd" value="<?= $data->quantite; ?>" onkeyup="numberDecimal(this)" <?= $disabled; ?>>
         <label id="quantite_upd-error" class="validation-error-label" for="quantite_upd"></label>
     </div>
 
