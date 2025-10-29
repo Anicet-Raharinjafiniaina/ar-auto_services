@@ -28,8 +28,43 @@ class Dashboard extends BaseController
 
     public function load()
     {
-        $arr['titre'] = "Dashboard";
-        echo view('dashboard_view');
+        $arr['titre'] = "";
+        $arr['arr_all_recette'] = $this->getAllRecette();
+        echo view('dashboard_view', $arr);
+    }
+
+    public function getAllRecette()
+    {
+        $sql = "SELECT *
+                FROM (
+                    -- bc
+                    SELECT 
+                        nf.id AS numero_facture_id, 
+                        bc.montant_paye AS montant, 
+                        bc.date_validation AS date_real,
+                        TO_CHAR(DATE(bc.date_validation), 'DD/MM/YYYY') AS date,
+                        'facture' AS source
+                    FROM bc
+                    LEFT JOIN numero_facture nf ON nf.bc_id = bc.id
+                    WHERE bc.statut_id = 3 AND bc.flag_suppression = 0
+
+                    UNION ALL
+
+                    -- paiement_credit
+                    SELECT 
+                        nf.id AS numero_facture_id,
+                        pc.montant, 
+                        pc.date_paiement AS date_real,
+                        TO_CHAR(DATE(pc.date_paiement), 'DD/MM/YYYY') AS date,
+                        'paiement à credit' AS source
+                    FROM paiement_credit pc
+                    LEFT JOIN bc ON pc.bc_id = bc.id
+                    LEFT JOIN numero_facture nf ON nf.bc_id = bc.id
+                    WHERE pc.flag_suppression = 0
+                ) AS t
+                ORDER BY date_real DESC;
+                ";
+        return $this->db->query($sql)->getResult();
     }
 
     public function get_recette_chart_data()
