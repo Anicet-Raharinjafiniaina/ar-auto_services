@@ -73,7 +73,7 @@
                         <?php
                         if (!empty($arr_all_recette)):
                             foreach ($arr_all_recette as $key => $value) : ?>
-                                <tr>
+                                <tr class="text-center">
                                     <td><b><?= "FA-" . str_pad($value->numero_facture_id, 4, '0', STR_PAD_LEFT); ?></b></td>
                                     <td><?= $value->source ?></td>
                                     <td><?= fmod($value->montant, 1) == 0 ? number_format($value->montant, 0, ',', ' ') : number_format($value->montant, 2, ',', ' ') ?><i> Ar</i></td>
