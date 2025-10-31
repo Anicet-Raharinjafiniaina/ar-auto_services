@@ -80,7 +80,7 @@ class Dashboard extends BaseController
                     FROM (
                         -- Totaux venant de la table bc
                         SELECT 
-                            DATE(bc.date_validation) AS label,
+                        TO_CHAR(DATE(bc.date_validation), 'DD/MM/YYYY') AS label,
                             SUM(COALESCE(bc.montant_paye, 0) + COALESCE(p.total_paye, 0)) AS total
                         FROM bc
                         LEFT JOIN (
@@ -102,7 +102,7 @@ class Dashboard extends BaseController
 
                         -- Dates paiement sans bc ou bc non valide
                         SELECT 
-                            DATE(pc.date_paiement) AS label,
+                               TO_CHAR(DATE(pc.date_paiement), 'DD/MM/YYYY') AS label,
                             SUM(pc.montant) AS total
                         FROM paiement_credit pc
                         LEFT JOIN bc 
@@ -171,36 +171,36 @@ class Dashboard extends BaseController
                         SUM(total) AS total
                     FROM (
                         SELECT 
-                            TO_CHAR(bc.date_validation, 'YYYY-MM') AS label,
+                            TO_CHAR(bc.date_validation, 'MM/YYYY') AS label,
                             SUM(COALESCE(bc.montant_paye, 0) + COALESCE(p.total_paye, 0)) AS total
                         FROM bc
                         LEFT JOIN (
                             SELECT 
                                 bc_id,
-                                TO_CHAR(date_paiement, 'YYYY-MM') AS mois_paiement,
+                                TO_CHAR(date_paiement, 'MM/YYYY') AS mois_paiement,
                                 SUM(montant) AS total_paye
                             FROM paiement_credit
                             WHERE flag_suppression = 0
-                            GROUP BY bc_id, TO_CHAR(date_paiement, 'YYYY-MM')
+                            GROUP BY bc_id, TO_CHAR(date_paiement, 'MM/YYYY')
                         ) AS p 
                             ON p.bc_id = bc.id 
-                            AND TO_CHAR(bc.date_validation, 'YYYY-MM') = p.mois_paiement
+                            AND TO_CHAR(bc.date_validation, 'MM/YYYY') = p.mois_paiement
                         WHERE bc.statut_id = 3 
                           AND bc.flag_suppression = 0
-                        GROUP BY TO_CHAR(bc.date_validation, 'YYYY-MM')
+                        GROUP BY TO_CHAR(bc.date_validation, 'MM/YYYY')
 
                         UNION ALL
 
                         SELECT 
-                            TO_CHAR(pc.date_paiement, 'YYYY-MM') AS label,
+                            TO_CHAR(pc.date_paiement, 'MM/YYYY') AS label,
                             SUM(pc.montant) AS total
                         FROM paiement_credit pc
                         LEFT JOIN bc 
                             ON bc.id = pc.bc_id 
-                            AND TO_CHAR(bc.date_validation, 'YYYY-MM') = TO_CHAR(pc.date_paiement, 'YYYY-MM')
+                            AND TO_CHAR(bc.date_validation, 'MM/YYYY') = TO_CHAR(pc.date_paiement, 'MM/YYYY')
                         WHERE pc.flag_suppression = 0
                           AND (bc.id IS NULL OR bc.statut_id != 3 OR bc.flag_suppression != 0)
-                        GROUP BY TO_CHAR(pc.date_paiement, 'YYYY-MM')
+                        GROUP BY TO_CHAR(pc.date_paiement, 'MM/YYYY')
                     ) AS result
                     GROUP BY label
                     ORDER BY label DESC
