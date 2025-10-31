@@ -60,7 +60,7 @@ class Dashboard extends BaseController
                     FROM paiement_credit pc
                     LEFT JOIN bc ON pc.bc_id = bc.id
                     LEFT JOIN numero_facture nf ON nf.bc_id = bc.id
-                    WHERE pc.flag_suppression = 0
+                    WHERE pc.flag_suppression = 0 AND  bc.statut_id = 3 AND bc.flag_suppression = 0
                 ) AS t
                 ORDER BY date_real DESC;
                 ";
