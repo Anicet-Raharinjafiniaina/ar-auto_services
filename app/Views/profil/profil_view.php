@@ -1,11 +1,16 @@
-<?= $this->extend('layouts/main') ?>
-
-<?= $this->section('link') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->extend('layouts/main') ?>
+    <?= $this->section('link') ?>
+<?php endif; ?>
 <!-- duallistbox Css -->
 <link href='<?= base_url("assets/libs/duallistbox/duallistbox.min.css") ?>' id="bootstrap-style" rel="stylesheet" type="text/css" />
-<?= $this->endSection() ?>
-
-<?= $this->section('content') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+    <?= $this->section('content') ?>
+<?php endif; ?>
+<?php if (isset($request_ajax) && $request_ajax): ?>
+    <div id="ajax-title" data-title="<?= esc($titre) ?>"></div>
+<?php endif; ?>
 <?php
 $acces_btn = "";
 $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "display:none;"'; ?>
@@ -116,9 +121,12 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
 </div>
 <!-- /Visualiser/Modifier profil -->
 
-<?= $this->endSection() ?>
-
-<?= $this->section('script') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+    <?= $this->section('script') ?>
+<?php endif; ?>
 <script type="text/javascript" src='<?= base_url("assets/libs/duallistbox/duallistbox.min.js") ?>'></script>
 <script type="text/javascript" src="assets/js/pages/profil.js"></script>
-<?= $this->endSection() ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+<?php endif; ?>

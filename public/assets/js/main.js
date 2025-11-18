@@ -849,3 +849,98 @@ function InputDateForm(id) {
         defaultDate: defaultDate,
     });
 }
+
+
+/*** Pour gérer le SPA */
+$(document).ready(function () {
+    function loadPage(url, addToHistory = true) {
+        $('#content-page').fadeOut(100, function () {
+            $('#content-page').html(loaderContentPage()).fadeIn(100);
+        });
+
+        $.ajax({
+            url: url,
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            success: function (data) {
+                // stopLoaderContent('main');
+                $('#content-page').fadeOut(100, function () {
+                    $('#content-page').html(data).fadeIn(100);
+
+                    // Mettre à jour le titre si présent
+                    var newTitle = $('#ajax-title').data('title'); // juste $('#ajax-title')
+                    if (newTitle) {
+                        $('.page-title-box h4').text(newTitle);
+                    }
+
+                    // Réinitialiser les scripts contenus dans la page chargée
+                    $('#content-page').find('script').each(function () {
+                        $.globalEval(this.text || this.textContent || this.innerHTML || '');
+                    });
+
+                    // Réinitialiser datatables si nécessaire
+                    if ($.fn.DataTable) {
+                        $('#datatable-buttons').DataTable();
+                    }
+                });
+
+                if (addToHistory) {
+                    history.pushState({
+                        url: url
+                    }, '', url);
+                }
+            },
+            error: function () {
+                $('#content-page').html('<div class="alert alert-danger text-center mt-3">Erreur de chargement</div>');
+            }
+        });
+    }
+
+    $(document).on('click', 'a.nav-link, a.menu-link', function (e) {
+        e.preventDefault();
+        const url = $(this).attr('href');
+        if (url && !url.startsWith('#')) {
+            loadPage(url);
+        }
+    });
+
+    window.onpopstate = function (event) {
+        if (event.state && event.state.url) {
+            loadPage(event.state.url, false);
+        }
+    };
+});
+
+function loaderContentPage() {
+    return `
+    <div style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 200px; /* ou hauteur souhaitée */
+        text-align: center;
+    ">
+        <div style="
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            border-color: #fff transparent #fff transparent;
+            animation: spin 1.2s linear infinite;
+            margin-bottom: 12px;
+        "></div>
+        <div style="font-size:16px; color:#fff;">Chargement en cours...</div>
+    </div>
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    `;
+}
+/*** /Pour gérer le SPA */

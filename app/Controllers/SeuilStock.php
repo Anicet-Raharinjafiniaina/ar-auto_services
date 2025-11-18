@@ -51,6 +51,12 @@ class SeuilStock extends BaseController
         $arr_categorie = $crud_categorie->getAllData(array("flag_suppression" => 0, "actif" => 1));
         $arr['arr_article'] = $arr_article;
         $arr['arr_categorie'] = $arr_categorie;
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('seuil_stock/seuil_view', $arr);
+            return;
+        }
         echo view('seuil_stock/seuil_view', $arr);
     }
 

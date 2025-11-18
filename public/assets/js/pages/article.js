@@ -17,21 +17,24 @@ $("#btn-add-article").click(function () {
     stopLoaderContent('main');
 });
 
-const fileInput = document.getElementById('fileInput');
-const preview = document.getElementById('preview');
+(function () {
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
 
-fileInput.addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function (event) {
-            preview.src = event.target.result;
-        };
-
-        reader.readAsDataURL(file);
+    if (fileInput && preview) {
+        fileInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    preview.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     }
-});
+})();
+
 
 function insert() {
     $(".validation-error-label").html("");

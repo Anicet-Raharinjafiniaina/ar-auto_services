@@ -43,6 +43,12 @@ class User extends BaseController
         $arr['arr_data_user'] = $crud->getAllData(array(TBL_UTILISATEUR . '.flag_suppression' => 0), $arr_join, TBL_UTILISATEUR . '.id,login,nom,prenom,' . TBL_UTILISATEUR . '.actif,profil.libelle as profil');
         $arr['titre'] = "Paramètrage des utilisateurs";
         $arr['arr_profil'] = $this->getAllProfil();
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('user/user_view', $arr);
+            return;
+        }
         echo view('user/user_view', $arr);
     }
 

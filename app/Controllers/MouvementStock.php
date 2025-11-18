@@ -62,6 +62,12 @@ class MouvementStock extends BaseController
                 WHERE article.flag_suppression = 0 AND article.actif = 1
                 ORDER BY article.id";
         $arr['arr_mouvement'] =  $this->db->query($sql)->getResult();
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('mouvement_stock/mouvement_view', $arr);
+            return;
+        }
         echo view('mouvement_stock/mouvement_view', $arr);
     }
 

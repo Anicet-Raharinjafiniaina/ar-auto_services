@@ -1,7 +1,10 @@
-<?= $this->extend('layouts/main') ?>
-
-<?= $this->section('content') ?>
-
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->extend('layouts/main') ?>
+    <?= $this->section('content') ?>
+<?php endif; ?>
+<?php if (isset($request_ajax) && $request_ajax): ?>
+    <div id="ajax-title" data-title="<?= esc($titre) ?>"></div>
+<?php endif; ?>
 
 <style>
     /* Supprime la largeur fixe */
@@ -89,9 +92,12 @@
     </div> <!-- end col -->
 </div>
 
-<?= $this->endSection() ?>
-
-<?= $this->section('script') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+    <?= $this->section('script') ?>
+<?php endif; ?>
 <script src="assets/libs/chart.js/Chart.bundle.min.js"></script>
 <script src="assets/js/pages/dashboard.js"></script>
-<?= $this->endSection() ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+<?php endif; ?>

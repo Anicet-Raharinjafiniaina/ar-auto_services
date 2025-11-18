@@ -30,6 +30,12 @@ class Dashboard extends BaseController
     {
         $arr['titre'] = "";
         $arr['arr_all_recette'] = $this->getAllRecette();
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('dashboard_view', $arr);
+            return;
+        }
         echo view('dashboard_view', $arr);
     }
 

@@ -73,6 +73,12 @@ class Promotion extends BaseController
         $arr['arr_promotion'] = $arr_promotion;
         $arr_article = $crud_article->getAllData(array("flag_suppression" => 0, "actif" => 1));
         $arr['arr_article'] = $arr_article;
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('promotion/promotion_view', $arr);
+            return;
+        }
         echo view('promotion/promotion_view', $arr);
     }
 

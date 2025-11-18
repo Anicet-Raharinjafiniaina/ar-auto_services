@@ -50,7 +50,13 @@ class Historique extends BaseController
         $arr['titre'] = "Historique d'intéractions";
         $arr_histo = $crud->getAllData([], $arr_join, TBL_HISTORIQUE . ".id," . TBL_CRUD_ACTION . ".libelle," . TBL_UTILISATEUR . ".login," . TBL_UTILISATEUR . ".nom," . TBL_HISTORIQUE . ".date_creation", TBL_HISTORIQUE . ".id", "", "desc");
         $arr['arr_histo'] = $arr_histo;
-        echo view('historique/historique_view', $arr);
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('categorie/historique_view', $arr);
+            return;
+        }
+        echo view('categorie/historique_view', $arr);
     }
 
     public function doExport()

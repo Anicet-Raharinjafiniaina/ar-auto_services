@@ -34,11 +34,16 @@ class ClientStandard extends BaseController
 
     public function load()
     {
-
         $crud = new CrudModel(TBL_CLIENT_STANDARD);
         $arr['titre'] = "Clients standards";
         $arr_client_satndard = $crud->getAllData(array("flag_suppression" => 0));
         $arr['arr_client_standard'] = $arr_client_satndard;
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('client/client_standard_view', $arr);
+            return;
+        }
         echo view('client/client_standard_view', $arr);
     }
 

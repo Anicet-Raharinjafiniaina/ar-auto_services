@@ -38,6 +38,12 @@ class Societe extends BaseController
         $arr['titre'] = "Information de la société";
         $arr_societe = $crud->getAllData(array("flag_suppression" => 0), [], "*", "id", "", "asc");
         $arr['arr_societe'] = $arr_societe;
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('societe/societe_view', $arr);
+            return;
+        }
         echo view('societe/societe_view', $arr);
     }
 

@@ -37,6 +37,12 @@ class Profil extends BaseController
         $arr['titre'] = "Paramètrage des profils";
         $arr['arr_profil_page'] = $this->getAllProfilPages();
         $arr['arr_page'] = $this->getAllPages();
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('profil/profil_view', $arr);
+            return;
+        }
         echo view('profil/profil_view', $arr);
     }
 

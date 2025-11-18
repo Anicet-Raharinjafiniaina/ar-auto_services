@@ -38,6 +38,12 @@ class Vehicule extends BaseController
         $arr['titre'] = "Liste des véhicules";
         $arr_vehicule = $crud->getAllData(array("flag_suppression" => 0), [], "*", "id", "", "asc");
         $arr['arr_vehicule'] = $arr_vehicule;
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('parc_auto/vehicule_view', $arr);
+            return;
+        }
         echo view('parc_auto/vehicule_view', $arr);
     }
 

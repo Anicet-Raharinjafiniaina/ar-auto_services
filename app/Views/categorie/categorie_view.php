@@ -1,6 +1,11 @@
-<?= $this->extend('layouts/main') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->extend('layouts/main') ?>
+    <?= $this->section('content') ?>
+<?php endif; ?>
+<?php if (isset($request_ajax) && $request_ajax): ?>
+    <div id="ajax-title" data-title="<?= esc($titre) ?>"></div>
+<?php endif; ?>
 
-<?= $this->section('content') ?>
 <?php
 $acces_btn = "";
 $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "display:none;"'; ?>
@@ -111,9 +116,11 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
 </div>
 <!-- /Visualiser/Modifier categorie -->
 
-<?= $this->endSection() ?>
-
-<?= $this->section('script') ?>
-<!-- datepicker js -->
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+    <?= $this->section('script') ?>
+<?php endif; ?>
 <script type="text/javascript" src="assets/js/pages/categorie.js"></script>
-<?= $this->endSection() ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+<?php endif; ?>

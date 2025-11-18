@@ -68,6 +68,12 @@ class Devis extends BaseController
         $token = bin2hex(random_bytes(16));
         session()->set('form_token', $token);
         $arr['token'] = $token;
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('facture/devis_view', $arr);
+            return;
+        }
         echo view('facture/devis_view', $arr);
     }
 

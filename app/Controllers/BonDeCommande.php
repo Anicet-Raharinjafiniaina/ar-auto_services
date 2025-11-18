@@ -64,6 +64,12 @@ class BonDeCommande extends BaseController
             ";
         $arr_bc =  $this->db->query($sql)->getResult();
         $arr['arr_bc'] = $arr_bc;
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('categorie/categorie_view', $arr);
+            return;
+        }
         echo view('parc_auto/bc_view', $arr);
     }
 

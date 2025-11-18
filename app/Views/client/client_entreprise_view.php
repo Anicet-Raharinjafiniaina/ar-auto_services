@@ -1,6 +1,7 @@
-<?= $this->extend('layouts/main') ?>
-
-<?= $this->section('link') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->extend('layouts/main') ?>
+    <?= $this->section('link') ?>
+<?php endif; ?>
 <style>
     .image-upload>input {
         display: none;
@@ -15,9 +16,13 @@
         border: 2px solid #ddd;
     }
 </style>
-<?= $this->endSection() ?>
-
-<?= $this->section('content') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+    <?= $this->section('content') ?>
+<?php endif; ?>
+<?php if (isset($request_ajax) && $request_ajax): ?>
+    <div id="ajax-title" data-title="<?= esc($titre) ?>"></div>
+<?php endif; ?>
 <?php
 $acces_btn = "";
 $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "display:none;"'; ?>
@@ -159,8 +164,11 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
 </div>
 <!-- /Visualiser/Modifier client -->
 
-<?= $this->endSection() ?>
-
-<?= $this->section('script') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+    <?= $this->section('script') ?>
+<?php endif; ?>
 <script type="text/javascript" src="assets/js/pages/client_entreprise.js"></script>
-<?= $this->endSection() ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+<?php endif; ?>

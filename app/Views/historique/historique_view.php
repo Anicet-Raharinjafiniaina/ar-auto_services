@@ -1,6 +1,10 @@
-<?= $this->extend('layouts/main') ?>
-
-<?= $this->section('content') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->extend('layouts/main') ?>
+    <?= $this->section('content') ?>
+<?php endif; ?>
+<?php if (isset($request_ajax) && $request_ajax): ?>
+    <div id="ajax-title" data-title="<?= esc($titre) ?>"></div>
+<?php endif; ?>
 
 <div class="row">
     <div class="col-12">
@@ -36,4 +40,6 @@
         <!-- end cardaa -->
     </div> <!-- end col -->
 </div>
-<?= $this->endSection() ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+<?php endif; ?>

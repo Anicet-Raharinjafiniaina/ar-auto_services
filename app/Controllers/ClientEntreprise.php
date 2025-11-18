@@ -38,6 +38,12 @@ class ClientEntreprise extends BaseController
         $arr['titre'] = "Clients entreprises";
         $arr_client = $crud->getAllData(array("flag_suppression" => 0));
         $arr['arr_client_entreprise'] = $arr_client;
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('client/client_entreprise_view', $arr);
+            return;
+        }
         echo view('client/client_entreprise_view', $arr);
     }
 

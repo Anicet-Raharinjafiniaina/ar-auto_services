@@ -1,5 +1,7 @@
-<?= $this->extend('layouts/main') ?>
-<?= $this->section('link') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->extend('layouts/main') ?>
+    <?= $this->section('link') ?>
+<?php endif; ?>
 <style>
     @media (max-width: 576px) {
         .custom-modal-width {
@@ -27,8 +29,10 @@
         font-size: 0.9em;
     }
 </style>
-<?= $this->endSection() ?>
-<?= $this->section('content') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+    <?= $this->section('content') ?>
+<?php endif; ?>
 <?php
 $acces_btn = "";
 $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "display:none;"'; ?>
@@ -112,9 +116,11 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
     </div>
 </div>
 <!-- /Visualiser/Modifier facturation -->
-
-<?= $this->endSection() ?>
-
-<?= $this->section('script') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+    <?= $this->section('script') ?>
+<?php endif; ?>
 <script type="text/javascript" src="assets/js/pages/facturation.js"></script>
-<?= $this->endSection() ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+<?php endif; ?>

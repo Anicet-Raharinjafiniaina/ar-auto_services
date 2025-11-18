@@ -205,7 +205,7 @@ $arr_menu = getMenu();
                                 <ul class="sub-menu menu-hover" aria-expanded="false">
                                     <?php foreach ($section as $key_page => $value_page) : ?>
                                         <li>
-                                            <a href="<?= base_url("$value_page->lien") ?>" class="menu-hover" key="t-products"><?= $value_page->page ?>
+                                            <a href="<?= base_url("$value_page->lien") ?>" class="menu-hover nav-link" key="t-products"><?= $value_page->page ?>
                                             </a>
                                         </li>
                                     <?php endforeach; ?>
@@ -226,18 +226,18 @@ $arr_menu = getMenu();
         <!-- ============================================================== -->
 
         <div class="main-content" id="main">
-            <div class=" page-content">
+            <div class="page-content">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18"><?= esc($titre ?? '') ?></h4>
+                                <h4 id="titre_page" class="mb-sm-0 font-size-18"><?= esc($titre ?? '') ?></h4>
                             </div>
                         </div>
                     </div>
-                    <main>
+                    <div id="content-page">
                         <?= $this->renderSection('content') ?>
-                    </main>
+                    </div>
                 </div> <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
@@ -399,7 +399,6 @@ $arr_menu = getMenu();
     </script>
 
     <?= $this->renderSection('script') ?>
-
 </body>
 
 </html>

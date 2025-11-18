@@ -46,6 +46,12 @@ class Article extends BaseController
         $arr_article = $crud->getAllData(array(TBL_ARTICLE . ".flag_suppression" => 0), $arr_join, TBL_ARTICLE . ".id," . TBL_ARTICLE . ".reference," . TBL_ARTICLE . ".libelle as article," . TBL_ARTICLE . ".date_creation_article," . TBL_ARTICLE . ".photo," . TBL_ARTICLE . ".commentaire," . TBL_ARTICLE . ".actif," . TBL_CATEGORIE . ".libelle as categorie");
         $arr['arr_article'] = $arr_article;
         $arr['arr_categorie'] = $this->getAllCategorie();
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('article/article_view', $arr);
+            return;
+        }
         echo view('article/article_view', $arr);
     }
 

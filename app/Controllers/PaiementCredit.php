@@ -54,6 +54,12 @@ class PaiementCredit extends BaseController
         $select = TBL_PAIEMENT . '.id,' . TBL_NUM_FACTURE . ".id as num_facture," . TBL_BC . ".id as bc_id," . TBL_PAIEMENT . ".montant," . TBL_PAIEMENT . ".date_paiement," . TBL_BC . ".restant_du," . TBL_PAIEMENT . ".commentaire";
         $arr['arr_data'] = $crud->getAllData(array(TBL_BC . ".statut_id" => 3, TBL_BC . ".flag_suppression" => 0, TBL_PAIEMENT . ".flag_suppression" => 0), $arr_join, $select);
         $arr['titre'] = "Suivi des paiements à crédit";
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('paiement_a_credit/list_view', $arr);
+            return;
+        }
         echo view('paiement_a_credit/list_view', $arr);
     }
 

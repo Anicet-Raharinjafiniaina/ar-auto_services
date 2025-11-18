@@ -1,6 +1,7 @@
-<?= $this->extend('layouts/main') ?>
-
-<?= $this->section('link') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->extend('layouts/main') ?>
+    <?= $this->section('link') ?>
+<?php endif; ?>
 <style>
     .card-flex-wrapper {
         display: flex;
@@ -42,9 +43,13 @@
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 </style>
-<?= $this->endSection() ?>
-
-<?= $this->section('content') ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+    <?= $this->section('content') ?>
+<?php endif; ?>
+<?php if (isset($request_ajax) && $request_ajax): ?>
+    <div id="ajax-title" data-title="<?= esc($titre) ?>"></div>
+<?php endif; ?>
 <?php
 helper('menu');
 $arr_menu = getMenu();
@@ -54,7 +59,7 @@ $arr_menu = getMenu();
         <?php if (!empty($arr_menu)) :
             foreach ($arr_menu as $key_section => $section) :
                 $lien = (isset($section[0]->lien) ? $section[0]->lien : "#"); ?>
-                <a href='<?= base_url($lien) ?>' class="text-decoration-none text-dark">
+                <a href='<?= base_url($lien) ?>' class="text-decoration-none text-dark nav-link">
                     <div class="card fixed-card text-center card-hover">
                         <div class="card-body">
                             <h5 class="card-title"><?= $key_section ?></h5>
@@ -66,4 +71,6 @@ $arr_menu = getMenu();
         endif; ?>
     </div>
 </div>
-<?= $this->endSection() ?>
+<?php if ($request_ajax == 0) : ?>
+    <?= $this->endSection() ?>
+<?php endif; ?>

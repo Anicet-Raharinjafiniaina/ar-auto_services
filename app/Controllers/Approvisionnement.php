@@ -64,6 +64,12 @@ class Approvisionnement extends BaseController
         $arr['arr_article'] = $arr_article;
         $arr['arr_categorie'] = $arr_categorie;
         $arr['arr_fournisseur'] = $arr_fournisseur;
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('approvisionnement/appro_view', $arr);
+            return;
+        }
         echo view('approvisionnement/appro_view', $arr);
     }
 

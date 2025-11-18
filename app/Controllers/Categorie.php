@@ -38,6 +38,12 @@ class Categorie extends BaseController
         $arr['titre'] = "Catégorie";
         $arr_categorie = $crud->getAllData(array("flag_suppression" => 0));
         $arr['arr_categorie'] = $arr_categorie;
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('categorie/categorie_view', $arr);
+            return;
+        }
         echo view('categorie/categorie_view', $arr);
     }
 

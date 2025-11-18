@@ -38,6 +38,12 @@ class Fournisseur extends BaseController
         $arr['titre'] = "Fournisseurs";
         $arr_fournisseur = $crud->getAllData(array("flag_suppression" => 0));
         $arr['arr_fournisseur'] = $arr_fournisseur;
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('fournisseur/fournisseur_view', $arr);
+            return;
+        }
         echo view('fournisseur/fournisseur_view', $arr);
     }
 

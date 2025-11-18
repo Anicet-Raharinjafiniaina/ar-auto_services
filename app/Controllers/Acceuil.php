@@ -13,6 +13,12 @@ class Acceuil extends BaseController
             return redirect()->to('/');
         }
         $arr['titre'] = "";
+        $arr['request_ajax'] = 0;
+        if ($this->request->isAJAX()) {
+            $arr['request_ajax'] = 1;
+            echo view('acceuil', $arr);
+            return;
+        }
         return view('acceuil', $arr);
     }
 }
