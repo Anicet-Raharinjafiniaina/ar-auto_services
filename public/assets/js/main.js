@@ -1,13 +1,6 @@
 $(function () {
     notification()
-    const tableId = '#datatable-buttons';
-    if ($.fn.DataTable.isDataTable(tableId)) {
-        $(tableId).DataTable().destroy();
-    }
-    $(tableId).DataTable({
-        order: []
-    });
-
+    initDataTable()
     if ($('#theme_value').val() == 1) {
         $('#mode-setting-btn').trigger('click');
     }
@@ -18,6 +11,18 @@ $(function () {
         $('#vertical-menu-btn').trigger('click');
     }
 });
+
+function initDataTable() {
+    const tableId = '#datatable-buttons';
+
+    if ($.fn.DataTable.isDataTable(tableId)) {
+        $(tableId).DataTable().destroy();
+    }
+    $(tableId).DataTable({
+        responsive: true,
+        order: []
+    });
+}
 
 /*** Affiche/cache les mots de passe ***/
 document.querySelectorAll(".toggle-password").forEach(function (toggle) {
@@ -866,25 +871,40 @@ $(document).ready(function () {
             },
             success: function (data) {
                 // stopLoaderContent('main');
+                // $('#content-page').fadeOut(100, function () {
+                //     $('#content-page').html(data).fadeIn(100);
+
+                //     // Mettre à jour le titre si présent
+                //     var newTitle = $('#ajax-title').data('title'); // juste $('#ajax-title')
+                //     if (newTitle) {
+                //         $('.page-title-box h4').text(newTitle);
+                //     }
+
+                //     // Réinitialiser les scripts contenus dans la page chargée
+                //     $('#content-page').find('script').each(function () {
+                //         $.globalEval(this.text || this.textContent || this.innerHTML || '');
+                //     });
+
+                //     // Réinitialiser datatables si nécessaire
+                //     initDataTable()
+                // });
                 $('#content-page').fadeOut(100, function () {
-                    $('#content-page').html(data).fadeIn(100);
+                    $('#content-page').html(data).fadeIn(100, function () {
+                        // Ici le fadeIn est terminé, le DOM est prêt et visible
+                        $('#content-page').find('script').each(function () {
+                            $.globalEval(this.text || this.textContent || this.innerHTML || '');
+                        });
+
+                        initDataTable(); // <-- maintenant ça va marcher
+                    });
 
                     // Mettre à jour le titre si présent
-                    var newTitle = $('#ajax-title').data('title'); // juste $('#ajax-title')
+                    var newTitle = $('#ajax-title').data('title');
                     if (newTitle) {
                         $('.page-title-box h4').text(newTitle);
                     }
-
-                    // Réinitialiser les scripts contenus dans la page chargée
-                    $('#content-page').find('script').each(function () {
-                        $.globalEval(this.text || this.textContent || this.innerHTML || '');
-                    });
-
-                    // Réinitialiser datatables si nécessaire
-                    if ($.fn.DataTable) {
-                        $('#datatable-buttons').DataTable();
-                    }
                 });
+
 
                 if (addToHistory) {
                     history.pushState({
@@ -922,18 +942,20 @@ function loaderContentPage() {
         align-items: center;
         min-height: 200px; /* ou hauteur souhaitée */
         text-align: center;
+        background-color: transparent;
     ">
         <div style="
             display: inline-block;
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            border: 6px solid #fff;
-            border-color: #fff transparent #fff transparent;
+            border: 6px solid #A9A9A9 ;
+            border-color: #A9A9A9  transparent #A9A9A9  transparent;
             animation: spin 1.2s linear infinite;
             margin-bottom: 12px;
+            background-color: transparent;
         "></div>
-        <div style="font-size:16px; color:#fff;">Chargement en cours...</div>
+        <div style="font-size:16px; color:#A9A9A9 ;">Chargement en cours...</div>
     </div>
     <style>
         @keyframes spin {

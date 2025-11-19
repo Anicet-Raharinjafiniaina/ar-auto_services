@@ -235,7 +235,7 @@ $arr_menu = getMenu();
                             </div>
                         </div>
                     </div>
-                    <div id="content-page">
+                    <div id="content-page" class="container-fluid bg-light p-3">
                         <?= $this->renderSection('content') ?>
                     </div>
                 </div> <!-- container-fluid -->
@@ -243,7 +243,7 @@ $arr_menu = getMenu();
             <!-- End Page-content -->
 
             <!-- changement mdp  -->
-            <div id="modal_mdp_user" class="modal fade">
+            <div id=" modal_mdp_user" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">

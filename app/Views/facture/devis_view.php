@@ -300,12 +300,14 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
     <?= $this->section('script') ?>
 <?php endif; ?>
 <script>
-    const articleOptions = `<?php if (!empty($arr_article)): foreach ($arr_article as $row_article): ?>
-        <option value="<?= $row_article->id ?>">
-            <?= $row_article->reference . " - " . $row_article->libelle ?>
-        </option>
-    <?php endforeach;
-                            endif; ?>`;
+    if (!window.articleOptions) {
+        window.articleOptions = `<?php if (!empty($arr_article)): foreach ($arr_article as $row_article): ?>
+            <option value="<?= $row_article->id ?>">
+                <?= $row_article->reference . " - " . $row_article->libelle ?>
+            </option>
+        <?php endforeach;
+                                    endif; ?>`;
+    }
 </script>
 <script src="assets/js/bases_pages/typeahead.min.js"></script>
 <script type="text/javascript" src="assets/js/pages/devis.js"></script>

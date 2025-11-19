@@ -1,7 +1,6 @@
-let recetteChart, articleChart;
-
 // --- Chart Montants des recettes ---
 $('#periode_recette').on('change', function () {
+    let recetteChart = null;
     const periode_recette = $(this).val();
     $.ajax({
         url: urlProject + "Dashboard/get_recette_chart_data",
@@ -16,7 +15,10 @@ $('#periode_recette').on('change', function () {
             const data = dataArray.map(item => item.total);
 
             // Détruire l'ancien chart si existant
-            if (recetteChart) recetteChart.destroy();
+            // if (recetteChart) recetteChart.destroy();
+            if (window.recetteChart !== undefined) {
+                window.recetteChart.destroy(); // supprime l'ancien graphique
+            }
 
             // Créer le nouveau chart
             recetteChart = new Chart(document.getElementById('recette_chart').getContext('2d'), {
@@ -56,6 +58,7 @@ $('#periode_recette').on('change', function () {
 
 // --- Chart Vente par article ---
 $('#periode_article').on('change', function () {
+    let articleChart = null;
     const periode_article = $(this).val();
     $.ajax({
         url: urlProject + "Dashboard/get_article_chart_data",
