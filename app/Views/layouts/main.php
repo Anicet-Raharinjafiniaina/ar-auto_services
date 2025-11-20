@@ -99,7 +99,7 @@ $arr_menu = getMenu();
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box">
-                        <a href='<?= base_url("Acceuil") ?>' class="logo logo-dark">
+                        <a href="#" onclick="loadPage('<?= base_url('Acceuil') ?>'); return false;" class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src='<?= base_url("assets/images/logo/images.png") ?>' alt="" height="30">
                             </span>
@@ -108,7 +108,7 @@ $arr_menu = getMenu();
                             </span>
                         </a>
 
-                        <a href='<?= base_url("Acceuil") ?>' class="logo logo-light">
+                        <a href="#" onclick="loadPage('<?= base_url('Acceuil') ?>'); return false;" class="logo logo-light">
                             <span class="logo-sm">
                                 <img src='<?= base_url("assets/images/logo/images.png") ?>' alt="" height="30">
                             </span>
@@ -243,7 +243,7 @@ $arr_menu = getMenu();
             <!-- End Page-content -->
 
             <!-- changement mdp  -->
-            <div id=" modal_mdp_user" class="modal fade">
+            <div id="modal_mdp_user" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
