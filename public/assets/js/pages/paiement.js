@@ -37,7 +37,8 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "PaiementCredit";
+                            $('#modal_ajout_paiement').modal('hide');
+                            loadPage(urlProject + "PaiementCredit", true)
                         }
                     });
                 } else {
@@ -141,7 +142,7 @@ function deleteItem(id) {
                 showConfirmButton: false
             }).then(() => {
                 stopLoaderContent('main')
-                location.reload(true);
+                loadPage(urlProject + "PaiementCredit", true)
             });
         }
     });
@@ -177,7 +178,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "PaiementCredit";
+                                    $('#modal_view_paiement').modal('hide');
+                                    loadPage(urlProject + "PaiementCredit", true)
                                 }
                             });
                         } else if (res == 2) {

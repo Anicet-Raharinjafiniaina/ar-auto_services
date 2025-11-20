@@ -59,7 +59,8 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "Fournisseur";
+                            $('#modal_ajout_fournisseur').modal('hide');
+                            loadPage(urlProject + "Fournisseur", true)
                         }
                     });
                 } else if (res == 2) {
@@ -160,7 +161,7 @@ function deleteItem(id) {
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
-                location.reload(true);
+                loadPage(urlProject + "Fournisseur", true)
             });
         }
     });
@@ -204,7 +205,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "Fournisseur";
+                                    $('#modal_view_fournisseur').modal('hide');
+                                    loadPage(urlProject + "Fournisseur", true)
                                 }
                             });
                         } else if (res == 2) {

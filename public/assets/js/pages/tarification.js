@@ -59,6 +59,8 @@ function insert() {
                     }).then(function (result) {
                         if (result.isConfirmed) {
                             window.location.href = urlProject + "Tarification";
+                            $('#modal_ajout_tarification').modal('hide');
+                            loadPage(urlProject + "Tarification", true)
                         }
                     });
                 } else if (res == 2) {
@@ -161,7 +163,7 @@ function deleteItem(id) {
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
-                location.reload(true);
+                loadPage(urlProject + "Tarification", true)
             });
         }
     });
@@ -198,7 +200,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "Tarification";
+                                    $('#modal_view_tarification').modal('hide');
+                                    loadPage(urlProject + "Tarification", true)
                                 }
                             });
                         } else if (res == 2) {

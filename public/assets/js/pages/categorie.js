@@ -40,7 +40,8 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "categorie";
+                            $('#modal_ajout_categorie').modal('hide');
+                            loadPage(urlProject + "categorie", true)
                         }
                     });
                 } else if (res == 2) {
@@ -162,7 +163,7 @@ function deleteItem(id) {
                 showConfirmButton: false
             }).then(() => {
                 stopLoaderContent('main')
-                location.reload(true);
+                loadPage(urlProject + "categorie", true)
             });
         }
     });
@@ -206,7 +207,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "Categorie";
+                                    $('#modal_view_categorie').modal('hide');
+                                    loadPage(urlProject + "categorie", true)
                                 }
                             });
                         } else if (res == 2) {

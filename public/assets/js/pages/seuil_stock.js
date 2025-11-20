@@ -63,7 +63,8 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "SeuilStock";
+                            $('#modal_ajout_seuil').modal('hide');
+                            loadPage(urlProject + "SeuilStock", true)
                         }
                     });
                 } else if (res == 2) {
@@ -166,7 +167,7 @@ function deleteItem(id) {
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
-                location.reload(true);
+                loadPage(urlProject + "SeuilStock", true)
             });
         }
     });
@@ -212,7 +213,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "SeuilStock";
+                                    $('#modal_view_seuil').modal('hide');
+                                    loadPage(urlProject + "SeuilStock", true)
                                 }
                             });
                         } else if (res == 2) {

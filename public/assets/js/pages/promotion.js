@@ -48,7 +48,8 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "Promotion";
+                            $('#modal_ajout_promotion').modal('hide');
+                            loadPage(urlProject + "Promotion", true)
                         }
                     });
                 } else if (res == 2) {
@@ -153,7 +154,7 @@ function deleteItem(id) {
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
-                location.reload(true);
+                loadPage(urlProject + "Promotion", true)
             });
         }
     });
@@ -198,7 +199,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "Promotion";
+                                    $('#modal_view_promotion').modal('hide');
+                                    loadPage(urlProject + "Promotion", true)
                                 }
                             });
                         } else if (res == 2) {

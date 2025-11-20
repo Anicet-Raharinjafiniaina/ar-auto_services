@@ -442,7 +442,8 @@ $('#bc_form_upd').on('submit', function (e) {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "BonDeCommande";
+                                    $('#modal_view_bc').modal('hide');
+                                    loadPage(urlProject + "BonDeCommande", true)
                                 }
                             });
                         } else if (res == 2) {

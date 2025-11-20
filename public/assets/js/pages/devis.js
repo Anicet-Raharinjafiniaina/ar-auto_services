@@ -336,7 +336,8 @@ $('#devis_form').on('submit', function (e) {
                     showConfirmButton: true,
                 }).then(function (result) {
                     if (result.isConfirmed) {
-                        window.location.href = urlProject + "Devis";
+                        $('#modal_ajout_devis').modal('hide');
+                        loadPage(urlProject + "Devis", true)
                     }
                 });
             },
@@ -407,6 +408,7 @@ function deleteDevis(id) {
             }).then(() => {
                 stopLoaderContent('main')
                 location.reload(true);
+                loadPage(urlProject + "Devis", true)
             });
         }
     });

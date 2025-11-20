@@ -60,7 +60,8 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "ClientEntreprise";
+                            $('#modal_ajout_client').modal('hide');
+                            loadPage(urlProject + "ClientEntreprise", true)
                         }
                     });
                 } else if (res == 2) {
@@ -169,7 +170,7 @@ function deleteItem(id) {
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
-                location.reload(true);
+                loadPage(urlProject + "ClientEntreprise", true)
             });
         }
     });
@@ -213,7 +214,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "ClientEntreprise";
+                                    $('#modal_view_client').modal('hide');
+                                    loadPage(urlProject + "ClientEntreprise", true)
                                 }
                             });
                         } else if (res == 2) {

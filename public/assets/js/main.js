@@ -811,22 +811,6 @@ function viewFactureNotif(id) {
     stopLoaderContent('main')
 }
 
-// function InputDateForm(id) {
-//     flatpickr("#" + id, {
-//         defaultDate: new Date(),
-//         dateFormat: "d/m/Y"
-//     });
-// }
-
-// function InputDateForm(id) {
-//     const input = document.getElementById(id);
-//     const currentValue = input.value.trim();
-//     flatpickr("#" + id, {
-//         dateFormat: "d/m/Y",                  // affichage en format français
-//         defaultDate: currentValue == "" ? new Date() : currentValue, // YYYY-MM-DD accepté
-//     });
-// }
-
 function InputDateForm(id) {
     const input = document.getElementById(id);
     const currentValue = input.value.trim();
@@ -862,7 +846,6 @@ $(document).ready(function () {
         $('#content-page').fadeOut(100, function () {
             $('#content-page').html(loaderContentPage()).fadeIn(100);
         });
-
         $.ajax({
             url: url,
             method: 'GET',
@@ -870,24 +853,6 @@ $(document).ready(function () {
                 'X-Requested-With': 'XMLHttpRequest'
             },
             success: function (data) {
-                // stopLoaderContent('main');
-                // $('#content-page').fadeOut(100, function () {
-                //     $('#content-page').html(data).fadeIn(100);
-
-                //     // Mettre à jour le titre si présent
-                //     var newTitle = $('#ajax-title').data('title'); // juste $('#ajax-title')
-                //     if (newTitle) {
-                //         $('.page-title-box h4').text(newTitle);
-                //     }
-
-                //     // Réinitialiser les scripts contenus dans la page chargée
-                //     $('#content-page').find('script').each(function () {
-                //         $.globalEval(this.text || this.textContent || this.innerHTML || '');
-                //     });
-
-                //     // Réinitialiser datatables si nécessaire
-                //     initDataTable()
-                // });
                 $('#content-page').fadeOut(100, function () {
                     $('#content-page').html(data).fadeIn(100, function () {
                         // Ici le fadeIn est terminé, le DOM est prêt et visible
@@ -895,7 +860,10 @@ $(document).ready(function () {
                             $.globalEval(this.text || this.textContent || this.innerHTML || '');
                         });
 
-                        initDataTable(); // <-- maintenant ça va marcher
+                        initDataTable();
+                        setTimeout(function () {
+                            activateMenuByUrl();
+                        }, 50);
                     });
 
                     // Mettre à jour le titre si présent
@@ -904,7 +872,6 @@ $(document).ready(function () {
                         $('.page-title-box h4').text(newTitle);
                     }
                 });
-
 
                 if (addToHistory) {
                     history.pushState({
@@ -917,6 +884,9 @@ $(document).ready(function () {
             }
         });
     }
+
+    // expose globalement
+    window.loadPage = loadPage;
 
     $(document).on('click', 'a.nav-link, a.menu-link', function (e) {
         e.preventDefault();
@@ -966,3 +936,32 @@ function loaderContentPage() {
     `;
 }
 /*** /Pour gérer le SPA */
+
+
+function activateMenuByUrl() {
+    let currentUrl = window.location.origin + window.location.pathname;
+    // ou window.location.href si tu veux inclure les paramètres GET
+
+    // 1. Supprimer toutes les classes d’activation
+    $('#side-menu a').removeClass('active');
+    $('#side-menu li').removeClass('mm-active');
+    $('#side-menu ul').removeClass('mm-show');
+
+    // 2. Trouver le lien correspondant
+    let $activeLink = $('#side-menu a[href="' + currentUrl + '"]');
+
+    if ($activeLink.length) {
+
+        // Ajouter la classe active sur le lien
+        $activeLink.addClass('active');
+
+        // 3. Activer les <li> parents
+        $activeLink.closest('li').addClass('mm-active');
+
+        // 4. Ouvrir sa section parente
+        $activeLink.closest('ul').addClass('mm-show');
+
+        // 5. Activer aussi le parent supérieur (le menu principal)
+        $activeLink.closest('ul').closest('li').addClass('mm-active');
+    }
+}

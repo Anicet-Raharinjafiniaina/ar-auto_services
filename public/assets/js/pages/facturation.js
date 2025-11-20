@@ -154,7 +154,8 @@ function lancerValidationFacture(id, validation, montant) {
                         showConfirmButton: true
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "Facturation";
+                            $('#modal_view_facturation').modal('hide');
+                            loadPage(urlProject + "Facturation", true)
                         }
                     });
                 } else if (val == 0) {
@@ -273,7 +274,8 @@ function devalidationFacture(id) {
                             icon: "success",
                             showConfirmButton: true
                         }).then(() => {
-                            window.location.href = urlProject + "DevalidationFacture";
+                            $('#modal_view_devalidation').modal('hide');
+                            loadPage(urlProject + "DevalidationFacture", true)
                         });
                     } else {
                         Swal.fire({

@@ -57,6 +57,8 @@ function insert() {
                     }).then(function (result) {
                         if (result.isConfirmed) {
                             window.location.href = urlProject + "Vehicule";
+                            $('#modal_ajout_vehicule').modal('hide');
+                            loadPage(urlProject + "Vehicule", true)
                         }
                     });
                 } else if (res == 2) {
@@ -159,7 +161,7 @@ function deleteItem(id) {
                 showConfirmButton: false
             }).then(() => {
                 stopLoaderContent('main')
-                location.reload(true);
+                loadPage(urlProject + "Vehicule", true)
             });
         }
     });
@@ -203,7 +205,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "Vehicule";
+                                    $('#modal_view_vehicule').modal('hide');
+                                    loadPage(urlProject + "Vehicule", true)
                                 }
                             });
                         } else if (res == 2) {

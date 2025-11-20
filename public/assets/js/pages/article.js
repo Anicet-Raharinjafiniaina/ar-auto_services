@@ -68,7 +68,8 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "Article";
+                            $('#modal_ajout_article').modal('hide');
+                            loadPage(urlProject + "Article", true)
                         }
                     });
                 } else if (res == 2) {
@@ -173,7 +174,7 @@ function deleteItem(id) {
                     timer: 2000,
                     showConfirmButton: false
                 }).then(() => {
-                    location.reload(true);
+                    loadPage(urlProject + "Article", true)
                 });
             } else if (result.value === 2) {
                 Swal.fire({
@@ -241,7 +242,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "Article";
+                                    $('#modal_view_article').modal('hide');
+                                    loadPage(urlProject + "Article", true)
                                 }
                             });
                         } else if (res == 2) {

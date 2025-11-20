@@ -56,7 +56,8 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "Approvisionnement";
+                            $('#modal_ajout_appro').modal('hide');
+                            loadPage(urlProject + "Approvisionnement", true)
                         }
                     });
                 } else {
@@ -152,7 +153,7 @@ function deleteItem(id) {
                 showConfirmButton: false
             }).then(() => {
                 stopLoaderContent('main')
-                location.reload(true);
+                loadPage(urlProject + "Approvisionnement", true)
             });
         }
     });
@@ -188,7 +189,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "Approvisionnement";
+                                    $('#modal_view_appro').modal('hide');
+                                    loadPage(urlProject + "Approvisionnement", true)
                                 }
                             });
                         } else if (res == 2) {

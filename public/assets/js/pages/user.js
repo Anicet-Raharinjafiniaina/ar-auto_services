@@ -37,7 +37,8 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "User";
+                            $('#modal_ajout_user').modal('hide');
+                            loadPage(urlProject + "User", true)
                         }
                     });
                 } else if (res == 2) {
@@ -141,7 +142,7 @@ function deleteItem(id) {
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
-                location.reload(true);
+                loadPage(urlProject + "User", true)
             });
         }
     });
@@ -177,7 +178,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "User";
+                                    $('#modal_view_user').modal('hide');
+                                    loadPage(urlProject + "User", true)
                                 }
                             });
                         } else if (res == 2) {

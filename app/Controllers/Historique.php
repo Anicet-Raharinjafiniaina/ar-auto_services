@@ -53,10 +53,10 @@ class Historique extends BaseController
         $arr['request_ajax'] = 0;
         if ($this->request->isAJAX()) {
             $arr['request_ajax'] = 1;
-            echo view('categorie/historique_view', $arr);
+            echo view('historique/historique_view', $arr);
             return;
         }
-        echo view('categorie/historique_view', $arr);
+        echo view('historique/historique_view', $arr);
     }
 
     public function doExport()

@@ -61,7 +61,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "Societe";
+                                    $('#modal_view_societe').modal('hide');
+                                    loadPage(urlProject + "Societe", true)
                                 }
                             });
                         } else if (res == 2) {

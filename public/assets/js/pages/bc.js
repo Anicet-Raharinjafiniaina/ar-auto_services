@@ -347,7 +347,8 @@ $('#bc_form').on('submit', function (e) {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "BonDeCommande";
+                            $('#modal_ajout_bc').modal('hide');
+                            loadPage(urlProject + "BonDeCommande", true)
                         }
                     });
                 } else {
@@ -448,7 +449,7 @@ function deleteBc(id) {
                 showConfirmButton: false
             }).then(() => {
                 stopLoaderContent('main')
-                location.reload(true);
+                loadPage(urlProject + "BonDeCommande", true)
             });
         }
     });

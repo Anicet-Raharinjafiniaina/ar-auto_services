@@ -48,7 +48,8 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "Profil";
+                            $('#modal_ajout_profil').modal('hide');
+                            loadPage(urlProject + "Profil", true)
                         }
                     });
                 } else if (res == 2) {
@@ -156,7 +157,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "Profil";
+                                    $('#modal_view_profil').modal('hide');
+                                    loadPage(urlProject + "Profil", true)
                                 }
                             });
                         } else if (res == 2) {
@@ -246,7 +248,7 @@ function deleteItem(id) {
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
-                location.reload(true);
+                loadPage(urlProject + "Profil", true)
             });
         }
     });

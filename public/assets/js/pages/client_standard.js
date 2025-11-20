@@ -59,7 +59,8 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "ClientStandard";
+                            $('#modal_ajout_client').modal('hide');
+                            loadPage(urlProject + "ClientStandard", true)
                         }
                     });
                 } else {
@@ -162,7 +163,7 @@ function deleteItem(id) {
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
-                location.reload(true);
+                loadPage(urlProject + "ClientStandard", true)
             });
         }
     });
@@ -206,7 +207,8 @@ function maj() {
                                 showConfirmButton: true,
                             }).then(function (result) {
                                 if (result.isConfirmed) {
-                                    window.location.href = urlProject + "ClientStandard";
+                                    $('#modal_view_client').modal('hide');
+                                    loadPage(urlProject + "ClientStandard", true)
                                 }
                             });
                         } else if (res == 2) {
