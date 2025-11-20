@@ -908,9 +908,11 @@ function loaderContentPage() {
     <div style="
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        min-height: 200px; /* ou hauteur souhaitée */
+        justify-content: center; /* centre verticalement */
+        align-items: center;     /* centre horizontalement */
+        height: 60vh;           /* prend toute la hauteur de l'écran */
+        width: 100%;             /* prend toute la largeur */
         text-align: center;
         background-color: transparent;
     ">
