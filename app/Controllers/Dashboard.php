@@ -37,30 +37,74 @@ class Dashboard extends BaseController
     {
         $sql = "SELECT *
                 FROM (
+                    ----------------------------------------------------------------------
                     -- bc
+                    ----------------------------------------------------------------------
                     SELECT 
                         nf.id AS numero_facture_id, 
+                                -- Nom du client selon le type
+                        CASE 
+                            WHEN bc.type_client = 1 THEN cs.nom || ' ' || cs.prenom
+                            WHEN bc.type_client = 2 THEN ce.libelle
+                        END AS nom_client,
                         bc.montant_paye AS montant, 
                         bc.date_validation AS date_real,
                         TO_CHAR(DATE(bc.date_validation), 'DD/MM/YYYY') AS date,
                         'facture' AS source
                     FROM bc
-                    LEFT JOIN numero_facture nf ON nf.bc_id = bc.id
-                    WHERE bc.statut_id = 3 AND bc.flag_suppression = 0
+                    LEFT JOIN numero_facture nf 
+                        ON nf.bc_id = bc.id
+
+                    -- Jointure client standard
+                    LEFT JOIN client_standard cs 
+                        ON cs.id = bc.client_id 
+                    AND bc.type_client = 1
+
+                    -- Jointure client entreprise
+                    LEFT JOIN client_entreprise ce 
+                        ON ce.id = bc.client_id 
+                    AND bc.type_client = 2
+
+                    WHERE bc.statut_id = 3 
+                    AND bc.flag_suppression = 0
+
 
                     UNION ALL
 
+                    ----------------------------------------------------------------------
                     -- paiement_credit
+                    ----------------------------------------------------------------------
                     SELECT 
                         nf.id AS numero_facture_id,
+                                -- Nom du client selon le type
+                        CASE 
+                            WHEN bc.type_client = 1 THEN cs2.nom || ' ' || cs2.prenom
+                            WHEN bc.type_client = 2 THEN ce2.libelle
+                        END AS nom_client,
                         pc.montant, 
                         pc.date_paiement AS date_real,
                         TO_CHAR(DATE(pc.date_paiement), 'DD/MM/YYYY') AS date,
                         'paiement à credit' AS source
                     FROM paiement_credit pc
-                    LEFT JOIN bc ON pc.bc_id = bc.id
-                    LEFT JOIN numero_facture nf ON nf.bc_id = bc.id
-                    WHERE pc.flag_suppression = 0 AND  bc.statut_id = 3 AND bc.flag_suppression = 0
+                    LEFT JOIN bc 
+                        ON pc.bc_id = bc.id
+
+                    LEFT JOIN numero_facture nf 
+                        ON nf.bc_id = bc.id
+
+                    -- Jointure client standard
+                    LEFT JOIN client_standard cs2 
+                        ON cs2.id = bc.client_id 
+                    AND bc.type_client = 1
+
+                    -- Jointure client entreprise
+                    LEFT JOIN client_entreprise ce2 
+                        ON ce2.id = bc.client_id 
+                    AND bc.type_client = 2
+
+                    WHERE pc.flag_suppression = 0 
+                    AND bc.statut_id = 3 
+                    AND bc.flag_suppression = 0
                 ) AS t
                 ORDER BY date_real DESC;
                 ";
