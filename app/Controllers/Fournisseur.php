@@ -97,7 +97,7 @@ class Fournisseur extends BaseController
         $arr["data"] = $arr_data;
         $arr["disabled"] = ($action == "voir") ? "disabled=disabled" : "";
         $arr["display"] = ($action == "voir") ? 'style="display:none;"' : "";
-        echo view('Fournisseur/maj_fournisseur_view', $arr);
+        echo view('fournisseur/maj_fournisseur_view', $arr);
     }
 
     public function deleteFournisseur()

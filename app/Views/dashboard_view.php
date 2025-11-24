@@ -66,6 +66,7 @@
                     <thead class="text-center">
                         <tr>
                             <th>Numéro facture</th>
+                            <th>Client</th>
                             <th>Nature</th>
                             <th>Montant</th>
                             <th>Date</th>
@@ -78,6 +79,7 @@
                             foreach ($arr_all_recette as $key => $value) : ?>
                                 <tr class="text-center">
                                     <td><b><?= "FA-" . str_pad($value->numero_facture_id, 4, '0', STR_PAD_LEFT); ?></b></td>
+                                    <td><?= $value->nom_client ?></td>
                                     <td><?= $value->source ?></td>
                                     <td><?= fmod($value->montant, 1) == 0 ? number_format($value->montant, 0, ',', ' ') : number_format($value->montant, 2, ',', ' ') ?><i> Ar</i></td>
                                     <td><?= $value->date ?></td>
