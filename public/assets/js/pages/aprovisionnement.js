@@ -156,6 +156,7 @@ function deleteItem(id) {
             }).then(() => {
                 stopLoaderContent('main')
                 loadPage(urlProject + "Approvisionnement", true)
+                notification()
             });
         }
     });
@@ -193,6 +194,7 @@ function maj() {
                                 if (result.isConfirmed) {
                                     $('#modal_view_appro').modal('hide');
                                     loadPage(urlProject + "Approvisionnement", true)
+                                    notification()
                                 }
                             });
                         } else if (res == 2) {

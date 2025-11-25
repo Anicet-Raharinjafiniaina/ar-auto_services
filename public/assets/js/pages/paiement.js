@@ -145,6 +145,7 @@ function deleteItem(id) {
             }).then(() => {
                 stopLoaderContent('main')
                 loadPage(urlProject + "PaiementCredit", true)
+                notification()
             });
         }
     });
@@ -182,6 +183,7 @@ function maj() {
                                 if (result.isConfirmed) {
                                     $('#modal_view_paiement').modal('hide');
                                     loadPage(urlProject + "PaiementCredit", true)
+                                    notification()
                                 }
                             });
                         } else if (res == 2) {

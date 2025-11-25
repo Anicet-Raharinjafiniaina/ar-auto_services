@@ -26,6 +26,7 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
                     <thead class="text-center">
                         <tr>
                             <th>N° Facture</th>
+                            <th>Client</th>
                             <th>Montant payé</th>
                             <th>Restant dû actuel</th>
                             <th>date</th>
@@ -40,6 +41,7 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
                             foreach ($arr_data as $key => $value) : ?>
                                 <tr id="<?= $value->id ?>" class="text-center">
                                     <td><b><?= ("FA-" . str_pad($value->num_facture, 4, '0', STR_PAD_LEFT)) ?></b></td>
+                                    <td><?= $value->nom_client ?></td>
                                     <td><?= fmod($value->montant, 1) == 0 ? number_format($value->montant, 0, ',', ' ') : number_format($value->montant, 2, ',', ' ') ?> <i>Ar</i></td>
                                     <td><b><?= fmod($value->restant_du, 1) == 0 ? number_format($value->restant_du, 0, ',', ' ') : number_format($value->restant_du, 2, ',', ' ') ?></b> <i>Ar</i></td>
                                     <td><?= date("d/m/Y", strtotime($value->date_paiement))  ?></td>
@@ -77,7 +79,7 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
                             <?php if (!empty($arr_client)) :
                                 foreach ($arr_client as $row) : ?>
                                     <option value="<?= $row->id ?>">
-                                        <?= ("FA-" . str_pad($row->num_facture, 4, '0', STR_PAD_LEFT)) ?>
+                                        <?= ("FA-" . str_pad($row->num_facture, 4, '0', STR_PAD_LEFT)) . " - " . $row->nom ?>
                                     </option>
                             <?php endforeach;
                             endif; ?>

@@ -39,19 +39,47 @@ class PaiementCredit extends BaseController
         $arr['arr_client'] = $notif->getNotifPaiement();
 
         $crud = new CrudModel(TBL_PAIEMENT);
+
         $arr_join = [
-            array(
+            [
                 'table' => TBL_BC,
                 'on' => TBL_BC . '.id = ' . TBL_PAIEMENT . '.bc_id',
                 'type' => 'left'
-            ),
-            array(
+            ],
+            [
                 'table' => TBL_NUM_FACTURE,
                 'on' => TBL_NUM_FACTURE . '.bc_id = ' . TBL_PAIEMENT . '.bc_id',
                 'type' => 'left'
-            ),
+            ],
+            // client standard
+            [
+                'table' => TBL_CLIENT_STANDARD,
+                'on' => TBL_CLIENT_STANDARD . '.id = ' . TBL_BC . '.client_id',
+                'type' => 'left'
+            ],
+            // client entreprise
+            [
+                'table' => TBL_CLIENT_ENTREPRISE,
+                'on' => TBL_CLIENT_ENTREPRISE . '.id = ' . TBL_BC . '.client_id',
+                'type' => 'left'
+            ],
         ];
-        $select = TBL_PAIEMENT . '.id,' . TBL_NUM_FACTURE . ".id as num_facture," . TBL_BC . ".id as bc_id," . TBL_PAIEMENT . ".montant," . TBL_PAIEMENT . ".date_paiement," . TBL_BC . ".restant_du," . TBL_PAIEMENT . ".commentaire";
+
+        $select =
+            TBL_PAIEMENT . '.id,' .
+            TBL_NUM_FACTURE . ".id as num_facture," .
+            TBL_BC . ".id as bc_id," .
+            TBL_PAIEMENT . ".montant," .
+            TBL_PAIEMENT . ".date_paiement," .
+            TBL_BC . ".restant_du," .
+            TBL_PAIEMENT . ".commentaire," .
+            "CASE 
+        WHEN " . TBL_BC . ".type_client = 1 
+            THEN CONCAT(" . TBL_CLIENT_STANDARD . ".nom, ' ', " . TBL_CLIENT_STANDARD . ".prenom)
+        WHEN " . TBL_BC . ".type_client = 2 
+            THEN " . TBL_CLIENT_ENTREPRISE . ".libelle
+        ELSE ''
+        END AS nom_client";
         $arr['arr_data'] = $crud->getAllData(array(TBL_BC . ".statut_id" => 3, TBL_BC . ".flag_suppression" => 0, TBL_PAIEMENT . ".flag_suppression" => 0), $arr_join, $select);
         $arr['titre'] = "Suivi des paiements à crédit";
         $arr['request_ajax'] = 0;
