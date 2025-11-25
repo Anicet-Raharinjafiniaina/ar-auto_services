@@ -65,6 +65,7 @@ function insert() {
                         if (result.isConfirmed) {
                             $('#modal_ajout_seuil').modal('hide');
                             loadPage(urlProject + "SeuilStock", true)
+                            notification()
                         }
                     });
                 } else if (res == 2) {
@@ -169,6 +170,7 @@ function deleteItem(id) {
                 showConfirmButton: false
             }).then(() => {
                 loadPage(urlProject + "SeuilStock", true)
+                notification()
             });
         }
     });
@@ -216,6 +218,7 @@ function maj() {
                                 if (result.isConfirmed) {
                                     $('#modal_view_seuil').modal('hide');
                                     loadPage(urlProject + "SeuilStock", true)
+                                    notification()
                                 }
                             });
                         } else if (res == 2) {
