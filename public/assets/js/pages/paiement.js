@@ -8,6 +8,7 @@ $(function () {
 $("#btn-add-paiement").click(function () {
     loaderContent('main')
     $("#modal_ajout_paiement").modal("show");
+    initialiseSelect2Modal("bc_id", "modal_ajout_paiement")
     $("#bc_id").val(null).trigger("change.select2");
     $("#montant").val("");
     $("#commentaire").val("");

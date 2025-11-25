@@ -9,7 +9,7 @@
                     $selected = (($row->id == $data->bc_id) ? 'selected' : '');
             ?>
                     <option value="<?= $row->id ?>" <?= $selected ?>>
-                        <?= ("FA-" . str_pad($row->num_facture, 4, '0', STR_PAD_LEFT)) ?>
+                        <?= ("FA-" . str_pad($row->num_facture, 4, '0', STR_PAD_LEFT)) . " - " . $row->nom ?>
                     </option>
             <?php endforeach;
             endif; ?>
