@@ -39,6 +39,7 @@ function insert() {
                         if (result.isConfirmed) {
                             $('#modal_ajout_paiement').modal('hide');
                             loadPage(urlProject + "PaiementCredit", true)
+                            notification()
                         }
                     });
                 } else {

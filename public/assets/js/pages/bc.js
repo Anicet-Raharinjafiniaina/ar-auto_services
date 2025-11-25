@@ -349,6 +349,7 @@ $('#bc_form').on('submit', function (e) {
                         if (result.isConfirmed) {
                             $('#modal_ajout_bc').modal('hide');
                             loadPage(urlProject + "BonDeCommande", true)
+                            notification()
                         }
                     });
                 } else {

@@ -58,6 +58,7 @@ function insert() {
                         if (result.isConfirmed) {
                             $('#modal_ajout_appro').modal('hide');
                             loadPage(urlProject + "Approvisionnement", true)
+                            notification()
                         }
                     });
                 } else {

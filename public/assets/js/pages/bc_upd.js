@@ -444,6 +444,7 @@ $('#bc_form_upd').on('submit', function (e) {
                                 if (result.isConfirmed) {
                                     $('#modal_view_bc').modal('hide');
                                     loadPage(urlProject + "BonDeCommande", true)
+                                    notification()
                                 }
                             });
                         } else if (res == 2) {

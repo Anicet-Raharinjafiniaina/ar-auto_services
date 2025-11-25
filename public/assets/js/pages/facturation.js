@@ -156,6 +156,7 @@ function lancerValidationFacture(id, validation, montant) {
                         if (result.isConfirmed) {
                             $('#modal_view_facturation').modal('hide');
                             loadPage(urlProject + "Facturation", true)
+                            notification()
                         }
                     });
                 } else if (val == 0) {
@@ -266,7 +267,6 @@ function devalidationFacture(id) {
                 success: function (res) {
                     stopLoaderContent('modal_view_devalidation');
                     $("#devalider, #annuler").prop("disabled", false);
-
                     if (res == 1) {
                         Swal.fire({
                             title: "Dévalidation facture",
@@ -276,6 +276,7 @@ function devalidationFacture(id) {
                         }).then(() => {
                             $('#modal_view_devalidation').modal('hide');
                             loadPage(urlProject + "DevalidationFacture", true)
+                            notification()
                         });
                     } else {
                         Swal.fire({
