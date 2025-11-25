@@ -78,12 +78,20 @@ class Societe extends BaseController
 
         $id = trim($this->request->getVar('id_upd'));
         $image = $this->request->getFile('logo_upd');
+        $imageSignature = $this->request->getFile('fileInput_signature_upd');
 
         $imageBase64 = "";
         if ($image && $image->isValid() && !$image->hasMoved()) {
             $imageContent = file_get_contents($image->getTempName());
             $imageBase64 = base64_encode($imageContent);
         }
+
+        $signatureBase64 = "";
+        if ($imageSignature && $imageSignature->isValid() && !$imageSignature->hasMoved()) {
+            $imageContentSignature = file_get_contents($imageSignature->getTempName());
+            $signatureBase64 = base64_encode($imageContentSignature);
+        }
+
         $arr_data = [
             'libelle' => trim($this->request->getVar('libelle_upd')),
             'adresse' => trim($this->request->getVar('adresse_upd')),
@@ -99,6 +107,11 @@ class Societe extends BaseController
         ];
         if ($imageBase64 != "") {
             $arr_data['logo'] = $imageBase64;
+        }
+
+        // Si une nouvelle signature est envoyée
+        if ($signatureBase64 != "") {
+            $arr_data['signature'] = $signatureBase64;
         }
         $crud = new CrudModel(TBL_SOCIETE);
         $arr_base = $crud->getDataByIdArray(array("id" => $id));

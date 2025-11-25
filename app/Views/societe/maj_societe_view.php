@@ -81,6 +81,25 @@
         <label id="adresse_mail_upd-error" class="validation-error-label" for="adresse_mail_upd"></label>
     </div>
 
+    <div class="form-group image-upload text-center" style="position: relative; width: 250px; height: 150px; margin: auto;">
+        <label for="fileInput_signature_upd" style="display: block; width: 100%; height: 100%; position: relative;">
+            <!-- Toujours un <img> avec src valide -->
+            <img
+                id="preview_signature_upd"
+                src="<?= !empty($data->signature) ? 'data:image/png;base64,' . $data->signature : 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=' ?>"
+                alt="Signature"
+                style="width: 100%; height: 100%; border-radius: 3px; object-fit: contain; background-color: #f0f0f0;">
+            <!-- Placeholder texte -->
+            <span id="signature_placeholder"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+                     display: <?= !empty($data->signature) ? 'none' : 'flex' ?>; 
+                     align-items: center; justify-content: center; color: #888; font-style: italic;">
+                Aucune signature
+            </span>
+        </label>
+        <input type="file" id="fileInput_signature_upd" name="fileInput_signature_upd" accept="image/*" style="display: none;">
+    </div>
+
     <?php if ($disabled == ""): ?>
         <div class="modal-footer d-flex justify-content-end" id="div-upd-footer">
             <button type="button" class="btn btn-success btn-sm  float-right" style="background-color:#21a89f;" id="save_upd" onclick="maj()"
@@ -104,6 +123,23 @@
                     preview.src = event.target.result;
                 };
                 reader.readAsDataURL(file);
+            }
+        });
+
+        const fileInputSignature = document.getElementById('fileInput_signature_upd');
+        const previewSignature = document.getElementById('preview_signature_upd');
+        const placeholder = document.getElementById('signature_placeholder');
+
+        fileInputSignature.addEventListener('change', function(e) {
+            const fileS = e.target.files[0];
+            if (fileS) {
+                const readerS = new FileReader();
+                readerS.onload = function(event) {
+                    previewSignature.src = event.target.result;
+                    // Masquer le texte "Aucune signature"
+                    if (placeholder) placeholder.style.display = 'none';
+                };
+                readerS.readAsDataURL(fileS);
             }
         });
     });

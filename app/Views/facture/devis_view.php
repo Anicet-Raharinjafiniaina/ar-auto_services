@@ -178,7 +178,7 @@ $style_btn = ($acces_btn == "write" || $acces_btn == "") ? "" : 'style = "displa
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label id="vehicule_label">Type de véhicule </label>
-                                                <input type="text" class="form-control input-xs" id="type_vehicule" name="type_vehicule" placeholder="Choisir une marque de véhicule..." onblur="checkRequiredFields('type_vehicule', 'immatriculation')">
+                                                <input type="text" class="form-control input-xs" id="type_vehicule" name="type_vehicule" placeholder="Tapez une marque de véhicule..." onblur="checkRequiredFields('type_vehicule', 'immatriculation')">
                                                 <label id="type_vehicule-error" class="validation-error-label" for="type_vehicule"></label>
                                             </div>
                                             <div class="col-md-6">

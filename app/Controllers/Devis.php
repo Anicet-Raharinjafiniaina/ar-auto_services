@@ -387,6 +387,17 @@ class Devis extends BaseController
                    <td><b><u>Le responsable</u></b></td>                  
                 </tr>
             </table>';
+            if ($arr_societe->signature != null && $arr_societe->signature != "") {
+                $signature =  'data:image/png;base64,' . (!empty($arr_societe) ? (isset($arr_societe->signature) ? $arr_societe->signature : "") : "");
+                $html .= '<br><br><br><table style="width: 100%;" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="width: 50%;"></td>
+                            <td style="width: 50%;text-align:right;">
+                                <img src="' . $signature . '" width="110">
+                            </td>
+                        </tr>
+                    </table>';
+            }
 
             $this->generatePDF($html,  'PF-' . str_pad($devis_id, 4, '0', STR_PAD_LEFT) . $nom_client_entrepise . "-" . date('Y') . " " . $arr_data['type_vehicule'] . " " . $arr_data['immatriculation'] . '.pdf',  $download, 0);
         } else {
