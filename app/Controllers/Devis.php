@@ -207,17 +207,13 @@ class Devis extends BaseController
             $html = '<table border="0" cellspacing="0" cellpadding="5" style="width: 100%;">';
             $html .= '<tr>';
             $html .= '<td style="width: 50%;">';
-            $html .= '
-                <table style="width: 100%; height: 100%;" border="0" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td style="height: 10px;"></td> <!-- Espace vide en haut -->
-                    </tr>
-                    <tr>
-                        <td style="text-align: center;">
-                            <img src="' . $img . '" width="80px">
-                        </td>
-                    </tr>
-                </table>';
+            $html .= '<table style="width: 100%;" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="width: 95%;" align="center">
+                                <img src="' . $img . '" width="110">
+                            </td>
+                        </tr>
+                    </table>';
             $html .= '</td>';
 
             $html .= '<td style="width: 50%; text-align: right;">';
@@ -241,7 +237,7 @@ class Devis extends BaseController
 
             $html .= '<table border="0" cellpadding="3" cellspacing="0" style="width: 100%;">';
             $html .= '<tr>';
-            $html .= '<td style="width: 50%; text-align: center;">';
+            $html .= '<td style="width: 50%; text-align: center;font-size:8px;">';
             // Adresse entreprise
             $html .= '<b>' . (!empty($arr_societe) ? (isset($arr_societe->libelle) ? $arr_societe->libelle : "") : "") . '</b><br>';
             ((!empty($arr_societe) && ($arr_societe->adresse != "" || $arr_societe->adresse != null)) ? $html .=  $arr_societe->adresse . '<br>' : "");

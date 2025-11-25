@@ -56,7 +56,6 @@ function insert() {
                         showConfirmButton: true
                     }).then(function (result) {
                         if (result.isConfirmed) {
-                            window.location.href = urlProject + "Vehicule";
                             $('#modal_ajout_vehicule').modal('hide');
                             loadPage(urlProject + "Vehicule", true)
                         }
