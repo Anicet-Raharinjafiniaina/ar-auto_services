@@ -727,6 +727,7 @@ function notification() {
             var nb_article = data[0].length;
             var nb_client = data[1].length;
             var html = "";
+            $("#nb_notif").text("")
             if (nb_article != 0 || nb_client != 0) {
                 $("#nb_notif").text(nb_article + nb_client); // maj du badge
             }
