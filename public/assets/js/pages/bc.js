@@ -418,6 +418,7 @@ function deleteBc(id) {
         confirmButtonText: "Oui",
         cancelButtonText: "Non",
         showLoaderOnConfirm: true,
+        backdrop: true,
         allowOutsideClick: () => !Swal.isLoading(),
         preConfirm: () => {
             loaderContent('main')
